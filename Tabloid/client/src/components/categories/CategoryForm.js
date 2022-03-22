@@ -8,9 +8,9 @@ import {
     Input,
     Button,
   } from "reactstrap";
-import { CategoryContext } from "../providers/CategoryProvider.js";
+import { CategoryContext } from "../../providers/CategoryProvider";
 import { useNavigate } from "react-router-dom";
-import Category from "./Category.js";
+import {Category} from "./Category.js";
 
 export const CategoryForm = () => {
     const { addCategory } = useContext(CategoryContext);

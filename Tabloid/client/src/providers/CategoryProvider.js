@@ -4,13 +4,13 @@ export const CategoryContext = createContext();
 
 export const CategoryProvider = (props) => {
 
-  const [category, setCategory] = useState([]);
+  const [categories, setCategories] = useState([]);
   
 
-  const getAllCategory = () => {
+  const getAllCategories = () => {
     return fetch("https://localhost:44360/api/Category")
       .then((res) => res.json())
-      .then(setCategory);
+      .then(setCategories);
   };
 
   const addCategory = (category) => {
@@ -20,7 +20,7 @@ export const CategoryProvider = (props) => {
         "Content-Type": "application/json",
       },
       body: JSON.stringify(category),
-    }).then(getAllCategory);
+    }).then(getAllCategories);
   };
 
   const editCategory = (category) => {
@@ -35,11 +35,11 @@ export const CategoryProvider = (props) => {
 
   const deleteCategory = (categoryId) => {
     return fetch(`/api/post/${categoryId}`, { method: "DELETE" })
-    .then(getAllCategory);
+    .then(getAllCategories);
   };
 
   return (
-    <CategoryContext.Provider value={{ category, getAllCategory, addCategory, editCategory, deleteCategory }}>
+    <CategoryContext.Provider value={{ categories, getAllCategories, addCategory, editCategory, deleteCategory }}>
       {props.children}
     </CategoryContext.Provider>
   );

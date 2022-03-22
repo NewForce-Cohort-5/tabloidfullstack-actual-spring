@@ -10,6 +10,7 @@ import {
   NavLink
 } from 'reactstrap';
 import { UserProfileContext } from "../providers/UserProfileProvider";
+import {Category} from './categories/Category';
 
 export default function Header() {
   const { isLoggedIn, logout } = useContext(UserProfileContext);
@@ -36,6 +37,10 @@ export default function Header() {
                 <NavItem>
                   <a aria-current="page" className="nav-link"
                     style={{ cursor: "pointer" }} onClick={logout}>Logout</a>
+                </NavItem>
+                <NavItem>
+                  <a aria-current="page" className="nav-link"
+                    style={{ cursor: "pointer" }} onClick={Category}>Category</a>
                 </NavItem>
               </>
             }

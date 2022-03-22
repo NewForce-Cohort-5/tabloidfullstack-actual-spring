@@ -1,25 +1,32 @@
-import React, { useContext, useEffect } from "react";
-import { CategoryContext } from "../providers/CategoryProvider"
-import Category from "./Category";
+import React, { useContext, useEffect, useState} from "react";
+import { CategoryContext } from "../../providers/CategoryProvider";
+import  Category from "./CategoryCard"
 
 export const CategoryList = () => {
-  const { category, getAllCategory } = useContext(CategoryContext);
+    const { categories, getAllCategories } = useContext(CategoryContext);
 
-  useEffect(() => {
-    getAllCategory();
-  }, []);
+useEffect(() => {
+    getAllCategories();
+}, []);
 
-  const user = JSON.parse(localStorage.getItem("tabloidUser"))
-  return (
-    <div className="container">
-      <div className="row justify-content-center">
-        <div className="cards-column">
-          {category.filter(p => p.userProfileId === user.id).map((category) => (
-            <Category key={category.id} category={category} />
-          ))}
-        </div>
-      </div>
+return (
+
+<div className="container">
+
+    <div className="categories">
+    {categories.map((singleCategoryInLoop) => (
+        <Category key={singleCategoryInLoop.id} category={singleCategoryInLoop} />
+    ))}
+
     </div>
-  );
-};
+</div>
+
+
+
+
+)
+
+
+
+}
 
