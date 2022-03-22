@@ -58,7 +58,7 @@ namespace Tabloid.Repositories
                         SqlDataReader reader = cmd.ExecuteReader();
 
                         if (reader.Read())
-                        {
+{
                             Tag tag = new Tag()
                             {
                                 Id = reader.GetInt32(reader.GetOrdinal("Id")),
@@ -130,7 +130,7 @@ namespace Tabloid.Repositories
                     conn.Open();
 
                     using (SqlCommand cmd = conn.CreateCommand())
-                    {
+    {
                         cmd.CommandText = @"
                             DELETE FROM Tag
                             WHERE Id = @id
