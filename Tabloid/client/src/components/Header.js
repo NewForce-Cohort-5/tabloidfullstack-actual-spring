@@ -30,8 +30,9 @@ export default function Header() {
             <NavItem>
               <NavLink tag={RRNavLink} to="/">Home</NavLink>
             </NavItem>
+            {/*checking if the current logged in user has usertype id of 1 (Admin) */}
             {currentUser.userTypeId === 1 ?  <NavItem>
-                  <NavLink tag={RRNavLink} to="/">User Profiles</NavLink>
+                  <NavLink tag={RRNavLink} to="/users">User Profiles</NavLink>
                 </NavItem>  : "" } 
             </>
 }
