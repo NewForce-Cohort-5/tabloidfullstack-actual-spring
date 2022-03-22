@@ -21,7 +21,9 @@ namespace Tabloid.Repositories
                     conn.Open();
                     using (var cmd = conn.CreateCommand())
                     {
-                        cmd.CommandText = "SELECT id, name FROM Tag";
+                        cmd.CommandText = @"SELECT id, name 
+                                FROM Tag
+                                Order by name asc";
                         var reader = cmd.ExecuteReader();
 
                         var Tags = new List<Tag>();
