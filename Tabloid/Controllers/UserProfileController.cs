@@ -16,6 +16,12 @@ namespace Tabloid.Controllers
             //_userProfileRepository = userProfileRepository;
             _userRepository = userRepository;
         }
+        // GET: api/<UserProfileController>
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(_userRepository.GetAllUsers());
+        }
 
         [HttpGet("GetByEmail")]
         public IActionResult GetByEmail(string email)
