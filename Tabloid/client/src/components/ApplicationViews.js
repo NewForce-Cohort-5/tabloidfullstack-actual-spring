@@ -8,6 +8,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
 import UserList from "./users/UserList";
+import { UserDetails } from "./users/UserDetail";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -26,6 +27,7 @@ export default function ApplicationViews() {
       <Routes>
         <Route path="/" element={<Hello />} />
         <Route path="/users" element={<UserList />} />
+        <Route path="/users/:id" element={<UserDetails />} />
       </Routes>
    );
   }
