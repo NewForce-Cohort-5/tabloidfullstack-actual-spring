@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, createContext } from "react";
 
-export const CategoryContext = React.createContext();
+export const CategoryContext = createContext();
 
 export const CategoryProvider = (props) => {
-  //* State for a list of posts 
+
   const [category, setCategory] = useState([]);
   
 

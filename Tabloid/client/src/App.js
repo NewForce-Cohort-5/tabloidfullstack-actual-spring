@@ -5,12 +5,15 @@ import Header from "./components/Header";
 import ApplicationViews from "./components/ApplicationViews";
 
 
+
 function App() {
   return (
     <Router>
       <UserProfileProvider>
+        
           <Header />
-          <ApplicationViews />       
+          <ApplicationViews /> 
+            
       </UserProfileProvider>
     </Router>
   );

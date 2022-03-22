@@ -1,9 +1,9 @@
-import React, { useContext, useEffect} from "react";
-import { CategoryContext } from "../providers/CategoryProvider";
+import React, { useContext, useEffect } from "react";
+import { CategoryContext } from "../providers/CategoryProvider"
 import Category from "./Category";
 
-const CategoryList = () => {
-  const { category, getAllCategory} = useContext(CategoryContext);
+export const CategoryList = () => {
+  const { category, getAllCategory } = useContext(CategoryContext);
 
   useEffect(() => {
     getAllCategory();
@@ -23,4 +23,3 @@ const CategoryList = () => {
   );
 };
 
-export default CategoryList;

@@ -16,22 +16,24 @@ export default function ApplicationViews() {
 
   if (!isLoggedIn) {
     return (
-    <CategoryProvider>
+    <UserProfileProvider>    
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="*" element={<Navigate to="/login" />} />
-        <Route path="/category" exact element={ <CategoryList />} />
-        <Route path="/category/add" element={ <CategoryForm />} />
+        <Route path="*" element={<Navigate to="/login" />} />      
       </Routes>
-    </CategoryProvider>
+    </UserProfileProvider>
     );
   }
   else{
    return(
+    <CategoryProvider>
       <Routes>
         <Route path="/" element={<Hello />} />
+        <Route path="/Category" exact element={ <CategoryList />} />
+        <Route path="/Category/add" element={ <CategoryForm />} />
       </Routes>
+    </CategoryProvider>
    );
   }
 }

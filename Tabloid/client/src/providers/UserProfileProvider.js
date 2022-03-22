@@ -1,5 +1,4 @@
 import React, { useState, useEffect, createContext } from "react";
-import { Spinner } from "reactstrap";
 
 
 export const UserProfileContext = createContext();
