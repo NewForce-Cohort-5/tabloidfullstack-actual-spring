@@ -23,7 +23,7 @@ export const UserDetails = () => {
   //formatting date for now with an array
   let date = (userProfile.createDateTime);
   let array = date.split('-').reverse().join('.')
-  var userDate = (array[12] + array[13] + "-" + array[0] + array[1]+ "-"+ array[15]+ array[16]+ array[17]+ array[18]);
+  var userDate = (array[12] + array[13] + "/" + array[0] + array[1]+ "/"+ array[15]+ array[16]+ array[17]+ array[18]);
 
   return ( 
       <div className="container">
