@@ -2,12 +2,14 @@
 
 
 using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
+using Tabloid.Models;
 
 namespace Tabloid.Repositories
 
 {
-    public class TagRepository : BaseRepository, ITagRepository
-    {
+ 
         public class TagRepository : BaseRepository,
        ITagRepository
         {
@@ -144,4 +146,3 @@ namespace Tabloid.Repositories
             }
         }
     }
-}

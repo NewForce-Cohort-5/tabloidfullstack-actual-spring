@@ -7,6 +7,8 @@ import {
 import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
+import {TagList} from "./tags/TagList";
+import { TagProvider } from "../providers/TagProvider";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -17,14 +19,18 @@ export default function ApplicationViews() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<Navigate to="/login" />} />
+       
       </Routes>
     );
   }
   else{
    return(
+      <TagProvider>
       <Routes>
         <Route path="/" element={<Hello />} />
+        <Route path="/tags" element={<TagList />} />
       </Routes>
+      </TagProvider>
    );
   }
 }

@@ -23,6 +23,7 @@ namespace Tabloid
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<ITagRepository, TagRepository>();
 
             services.AddControllers();
 

@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using Tabloid.Repositories;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -9,10 +11,19 @@ namespace Tabloid.Controllers
     public class TagController : ControllerBase
     {
         // GET: api/<TagController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly ITagRepository _tagRepo;
+
+        public TagController(ITagRepository tagRepository)
         {
-            return new string[] { "value1", "value2" };
+            _tagRepo = tagRepository;
+        }
+
+
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(_tagRepo.GetAllTags());
+            
         }
 
         // GET api/<TagController>/5
