@@ -1,12 +1,27 @@
 import React from "react";
-
+import { Card,CardBody, Button } from "reactstrap";
 
 
 export const Category = ({category}) => {
   return (
-      <>
-      <p className="list-of-categories">{category.name}</p>
-      </>
+      
+    <Card className="m-4">
+    <CardBody>
+ <p className="text-left px-2"><strong>Tag Name: </strong></p>
+ <p>{category.name}</p>
+  <Button outline>
+    Edit
+  </Button>
+  {' '}   
+  <Button
+    color="danger"
+    outline
+  >
+    Delete
+  </Button>
+
+  </CardBody>
+  </Card>
   )
 };
 
