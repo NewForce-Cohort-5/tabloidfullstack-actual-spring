@@ -6,9 +6,16 @@ export const UserProfileContext = createContext();
 export function UserProfileProvider(props) {
 
   const apiUrl = "https://localhost:44360";
-
+  const [userProfiles, setUserProfiles] = useState([]);
   const userProfile = sessionStorage.getItem("userProfile");
   const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null);
+
+
+  const getAllUserProfiles = () => {
+    return fetch(`${apiUrl}/api/UserProfile`)
+      .then((res) => res.json())
+      .then(setUserProfiles);
+  };
 
 
   const login = (userObject) => {
@@ -51,7 +58,7 @@ export function UserProfileProvider(props) {
 
 
   return (
-    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register,  }}>
+    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getAllUserProfiles, userProfiles, userProfile, setUserProfiles  }}>
        {props.children}
     </UserProfileContext.Provider>
   );

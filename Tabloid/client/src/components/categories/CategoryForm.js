@@ -36,13 +36,6 @@ export const CategoryForm = () => {
             <Card className="col-sm-12 col-lg-6">
               <CardBody>
                 <Form>
-                  {/* <FormGroup>
-                    <Label for="userId">User Id (For Now...)</Label>
-                    <Input
-                      id="userId"
-                      onChange={(e) => setUserProfileId(e.target.value)}
-                    />
-                  </FormGroup> */}
                   <FormGroup>
                     <Label for="name">Category Name</Label>
                     <Input

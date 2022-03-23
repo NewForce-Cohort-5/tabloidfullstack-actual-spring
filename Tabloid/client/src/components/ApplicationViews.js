@@ -10,6 +10,7 @@ import Hello from "./Hello";
 import {CategoryForm} from "./categories/CategoryForm"
 import {CategoryList} from "./categories/CategoryList"
 import { CategoryProvider } from "../providers/CategoryProvider";
+import UserList from "./users/UserList";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -30,6 +31,7 @@ export default function ApplicationViews() {
         <Route path="/" element={<Hello />} />
         <Route path="/Category" exact element={ <CategoryList />} />
         {/* <Route path="/Category/add" element={ <CategoryForm />} /> */}
+        <Route path="/users" element={<UserList />} />
       </Routes>
     </CategoryProvider>
     

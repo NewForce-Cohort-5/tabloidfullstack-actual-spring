@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 using Tabloid.Models;
 using Tabloid.Utils;
 
@@ -7,6 +9,37 @@ namespace Tabloid.Repositories
     public class UserRepository : BaseRepository, IUserRepository
     {
         public UserRepository(IConfiguration configuration) : base(configuration) { }
+
+        public List<UserProfile> GetAllUsers()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                       SELECT u.id, u.FirstName, u.LastName, u.DisplayName, u.Email,
+                              u.CreateDateTime, u.ImageLocation, u.UserTypeId,
+                              ut.[Name] AS UserTypeName
+                         FROM UserProfile u
+                              LEFT JOIN UserType ut ON u.UserTypeId = ut.id
+                               ORDER BY u.DisplayName ASC;";
+
+                    var reader = cmd.ExecuteReader();
+
+                    var users = new List<UserProfile>();
+
+                    while (reader.Read())
+                    {
+                        users.Add(NewUserFromReader(reader));
+                    }
+
+                    reader.Close();
+
+                    return users;
+                }
+            }
+        }
 
         public UserProfile GetByEmail(string email)
         {
@@ -30,23 +63,7 @@ namespace Tabloid.Repositories
                     var reader = cmd.ExecuteReader();
                     if (reader.Read())
                     {
-                        userProfile = new UserProfile()
-                        {
-                            Id = DbUtils.GetInt(reader, "Id"),
-                            //FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
-                            FirstName = DbUtils.GetString(reader, "FirstName"),
-                            LastName = DbUtils.GetString(reader, "LastName"),
-                            DisplayName = DbUtils.GetString(reader, "DisplayName"),
-                            Email = DbUtils.GetString(reader, "Email"),
-                            CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
-                            ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
-                            UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
-                            UserType = new UserType()
-                            {
-                                Id = DbUtils.GetInt(reader, "UserTypeId"),
-                                Name = DbUtils.GetString(reader, "UserTypeName"),
-                            }
-                        };
+                        userProfile = NewUserFromReader(reader);
                     }
                     reader.Close();
 
@@ -81,6 +98,29 @@ namespace Tabloid.Repositories
             }
         }
 
+            private UserProfile NewUserFromReader(SqlDataReader reader)
+            {
+                return new UserProfile()
+                {
+
+                    Id = DbUtils.GetInt(reader, "Id"),
+                    //FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                    FirstName = DbUtils.GetString(reader, "FirstName"),
+                    LastName = DbUtils.GetString(reader, "LastName"),
+                    DisplayName = DbUtils.GetString(reader, "DisplayName"),
+                    Email = DbUtils.GetString(reader, "Email"),
+                    CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
+                    ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
+                    UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                    UserType = new UserType()
+                    {
+                        Id = DbUtils.GetInt(reader, "UserTypeId"),
+                        Name = DbUtils.GetString(reader, "UserTypeName"),
+                    }
+                };
+            }
+        }
+
         /*
         public UserProfile GetByFirebaseUserId(string firebaseUserId)
         {
@@ -96,4 +136,4 @@ namespace Tabloid.Repositories
         }
         */
     }
-}
+

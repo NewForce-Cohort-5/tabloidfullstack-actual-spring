@@ -14,6 +14,7 @@ import {Category} from './categories/Category';
 
 export default function Header() {
   const { isLoggedIn, logout } = useContext(UserProfileContext);
+  const currentUser = JSON.parse(sessionStorage.getItem("userProfile"));
   const [isOpen, setIsOpen] = useState(false);
   const toggle = () => setIsOpen(!isOpen);
 
@@ -24,12 +25,21 @@ export default function Header() {
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
           <Nav className="mr-auto" navbar>
-            { /* When isLoggedIn === true, we will render the Home link */ }
+               { /* When isLoggedIn === true, we will render the Home link */ }
             {isLoggedIn &&
-              <NavItem>
-                <NavLink tag={RRNavLink} to="/">Home</NavLink>
+              <>
+            <NavItem>
+              <NavLink tag={RRNavLink} to="/">Home</NavLink>
+            </NavItem>
+            <NavItem>
+                <NavLink tag={RRNavLink} to="/category">Categories</NavLink>
               </NavItem>
-            }
+            {/*checking if the current logged in user has usertype id of 1 (Admin) */}
+            {currentUser.userTypeId === 1 ?  <NavItem>
+                  <NavLink tag={RRNavLink} to="/users">User Profiles</NavLink>
+                </NavItem>  : "" } 
+            </>
+}
           </Nav>
           <Nav navbar>
             {isLoggedIn &&
@@ -37,10 +47,6 @@ export default function Header() {
                 <NavItem>
                   <a aria-current="page" className="nav-link"
                     style={{ cursor: "pointer" }} onClick={logout}>Logout</a>
-                </NavItem>
-                <NavItem>
-                  <a aria-current="page" className="nav-link"
-                    style={{ cursor: "pointer" }} onClick={Category}>Category</a>
                 </NavItem>
               </>
             }
