@@ -29,9 +29,14 @@ namespace Tabloid.Controllers
 
         // GET api/<TagController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id)
         {
-            return "value";
+            var tag = _tagRepo.GetTagById(id);
+            if (tag == null)
+            {
+                return NotFound();
+            }
+            return Ok(tag);
         }
 
         // POST api/<TagController>

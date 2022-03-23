@@ -1,26 +1,47 @@
-import React, { useContext } from "react";
-import {  useNavigate } from "react-router-dom";
+import { Modal } from "react-bootstrap";
+import React, { useContext,useState } from "react";
+import {   useNavigate,   } from "react-router-dom";
 import { Card,CardBody, Button } from "reactstrap";
-import { TagProvider } from "../../providers/TagProvider";
+import { TagContext } from "../../providers/TagProvider";
 
 
 const Tag = ({ tagProp }) => {
   
-  const { deleteTag, getAllTags } = useContext(TagProvider)
+  const { deleteTag } = useContext(TagContext)
+
+  // const [tag, setTag] = useState({})
+
+
+    const [show, setShow] = useState(false);
+  
+    const handleClose = () => setShow(false);
+    const handleShow = () => setShow(true);
+  
 
   const navigate = useNavigate();
+
+  // const {tagId} = useParams();
+
   const handleTagDelete = () => {
-    console.log("deleteIdeaIds",tagProp.id)
+    console.log("deleteTagId",tagProp.id)
+    debugger
     deleteTag(tagProp.id)
-      .then(() => {
-        navigate(getAllTags)
-      })
+    
+        navigate(handleClose)
+            
   }
 
-
+  // useEffect(() => {
+  //   console.log("useEffect", tagId)
+  //   getTagById(tagId)
+  //   .then((response) => {
+  //     setTag(response)
+  //   })
+  //   }, [])
 
 
   return (
+   
     <Card className="m-4">
          <CardBody>
       <p className="text-left px-2"><strong>Tag Name: </strong></p>
@@ -33,13 +54,32 @@ const Tag = ({ tagProp }) => {
   <Button
     color="danger"
     outline
-    onClick={handleTagDelete}
+    onClick={handleShow}
   >
     Delete
   </Button>
 
      </CardBody>
-    </Card>
+  
+
+
+<Modal show={show} onHide={handleClose}>
+<Modal.Header closeButton>
+<Modal.Title>Delete Tag</Modal.Title>
+</Modal.Header>
+<Modal.Body>Tag Name: {tagProp.name}</Modal.Body>
+<Modal.Footer>
+  <Button variant="secondary" onClick={handleTagDelete}>
+    Confirm Delete
+  </Button>
+  <Button variant="primary" onClick={handleClose}>
+    Back to List
+  </Button>
+</Modal.Footer>
+</Modal>
+</Card>
+
+
   );
 };
 
