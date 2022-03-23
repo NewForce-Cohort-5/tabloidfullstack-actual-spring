@@ -11,8 +11,8 @@ import {CategoryList} from "./categories/CategoryList"
 import { CategoryProvider } from "../providers/CategoryProvider";
 import {TagList} from "./tags/TagList";
 import { TagProvider } from "../providers/TagProvider";
-import {PostList} from "./posts/PostList";
-// import { PostProvider } from "../providers/PostProvider";
+import { PostList } from "./posts/PostList";
+import { PostProvider } from "../providers/PostProvider";
 import UserList from "./users/UserList";
 import { UserDetails } from "./users/UserDetail";
 import TagForm from "./tags/TagForm";
@@ -31,6 +31,7 @@ export default function ApplicationViews() {
   }
   else{
    return(
+     <PostProvider>
     <TagProvider>  
       <CategoryProvider>
         <Routes>
@@ -44,7 +45,9 @@ export default function ApplicationViews() {
         </Routes>
       </CategoryProvider>
     </TagProvider>
-      
+    </PostProvider>  
+
+
    );
   }
 }

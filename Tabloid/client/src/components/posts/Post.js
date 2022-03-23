@@ -5,21 +5,15 @@ import { Link } from "react-router-dom";
 const Post = ({ postProp }) => {
     
   return (
-    //Card is a component imported from the React strap
     <Card className="m-4">
-      <p className="text-left px-2">Posted by: {postProp.userProfile.name}</p>
-      <CardImg top src={postProp.imageUrl} alt={postProp.title} />
+      <CardImg top src={postProp.userProfile.imageLocation}  /> 
       <CardBody>
-        <p>
-          <strong>{postProp.title}</strong>
-        </p>
-        <p>{postProp.caption}</p>
-        <Link to={`/posts/${postProp.id}`}>
-    <strong>{postProp.title}</strong>
-    </Link>
+      <p> Post title: <Link to={`/posts/${postProp.id}`}><strong>{postProp.title}</strong> </Link>
+      </p>
+      <p className="text-left px-0">Posted by: {postProp.userProfile.fullName}</p>
       </CardBody>
     </Card>
   );
 };
-
 export default Post;
+
