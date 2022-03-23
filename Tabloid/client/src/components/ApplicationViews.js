@@ -7,9 +7,10 @@ import {
 import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
-import {CategoryForm} from "./categories/CategoryForm"
 import {CategoryList} from "./categories/CategoryList"
 import { CategoryProvider } from "../providers/CategoryProvider";
+import {TagList} from "./tags/TagList";
+import { TagProvider } from "../providers/TagProvider";
 import UserList from "./users/UserList";
 
 export default function ApplicationViews() {
@@ -26,15 +27,16 @@ export default function ApplicationViews() {
   }
   else{
    return(
-    <CategoryProvider>
-      <Routes>
-        <Route path="/" element={<Hello />} />
-        <Route path="/Category" exact element={ <CategoryList />} />
-        {/* <Route path="/Category/add" element={ <CategoryForm />} /> */}
-        <Route path="/users" element={<UserList />} />
-      </Routes>
-    </CategoryProvider>
-    
+    <TagProvider>  
+      <CategoryProvider>
+        <Routes>
+          <Route path="/" element={<Hello />} />
+          <Route path="/Category" exact element={ <CategoryList />} />       
+          <Route path="/users" element={<UserList />} />
+          <Route path="/tags" element={<TagList />} />
+        </Routes>
+      </CategoryProvider>
+    </TagProvider>
    );
   }
 }

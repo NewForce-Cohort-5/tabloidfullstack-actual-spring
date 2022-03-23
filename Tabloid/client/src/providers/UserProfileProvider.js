@@ -3,7 +3,7 @@ import React, { useState, useEffect, createContext } from "react";
 
 export const UserProfileContext = createContext();
 
-export function UserProfileProvider(props) {
+export const UserProfileProvider =(props) =>{
 
   const apiUrl = "https://localhost:44360";
   const [userProfiles, setUserProfiles] = useState([]);

@@ -6,14 +6,16 @@ import ApplicationViews from "./components/ApplicationViews";
 import { CategoryProvider } from './providers/CategoryProvider';
 
 
+import { TagProvider } from './providers/TagProvider';
 
 function App() {
   return (
     <Router>
       <UserProfileProvider>          
           <Header />
-          <ApplicationViews />     
+          <ApplicationViews />         
       </UserProfileProvider>
+
     </Router>
   );
 }
