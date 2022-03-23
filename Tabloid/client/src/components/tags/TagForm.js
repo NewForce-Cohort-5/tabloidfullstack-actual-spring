@@ -32,7 +32,7 @@ const TagForm = () => {
 
         if(tag.name === "" )
         {
-            alert("Please fill out the title and/or image url fields.")
+            alert("Please fill out the tag name.")
         } else {
             addTag(tag)
             .then(navigate("/tags"));
