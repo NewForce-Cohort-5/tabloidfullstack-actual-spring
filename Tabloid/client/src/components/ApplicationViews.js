@@ -8,6 +8,7 @@ import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
 import {CategoryList} from "./categories/CategoryList"
+import { CategoryForm } from "./categories/CategoryForm";
 import { CategoryProvider } from "../providers/CategoryProvider";
 import {TagList} from "./tags/TagList";
 import { TagProvider } from "../providers/TagProvider";
@@ -33,7 +34,8 @@ export default function ApplicationViews() {
       <CategoryProvider>
         <Routes>
           <Route path="/" element={<Hello />} />
-          <Route path="/Category" exact element={ <CategoryList />} />       
+          <Route path="/Category" element={ <CategoryList />} />
+          <Route path="/category/add" element={ <CategoryForm />} />        
           <Route path="/users" element={<UserList />} />
           <Route path="/add/tags" element={<TagForm />} />
           <Route path="/users/:id" element={<UserDetails />} />
