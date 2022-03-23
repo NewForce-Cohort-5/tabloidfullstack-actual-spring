@@ -10,6 +10,7 @@ import {
   NavLink
 } from 'reactstrap';
 import { UserProfileContext } from "../providers/UserProfileProvider";
+import {Category} from './categories/Category';
 
 export default function Header() {
   const { isLoggedIn, logout } = useContext(UserProfileContext);
@@ -34,9 +35,12 @@ export default function Header() {
             {currentUser.userTypeId === 1 ?  <NavItem>
                   <NavLink tag={RRNavLink} to="/users">User Profiles</NavLink>
                 </NavItem>  : "" } 
-                <NavItem>
-                <NavLink tag={RRNavLink} to="/tags">Tag Management</NavLink>
+                <NavItem> 
+                <NavLink tag={RRNavLink} to="/Category">Category Management</NavLink>
                 </NavItem>
+                <NavItem> 
+                <NavLink tag={RRNavLink} to="/tags">Tag Management</NavLink>
+                </NavItem>                                
             </>
 }
           </Nav>

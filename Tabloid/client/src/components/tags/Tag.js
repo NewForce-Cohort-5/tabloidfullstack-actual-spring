@@ -11,7 +11,7 @@ const Tag = ({ tagProp }) => {
       <p className="text-left px-2"><strong>Tag Name: </strong></p>
       <p>{tagProp.name}</p>
       
-      <Button outline>
+  <Button outline>
     Edit
   </Button>
   {' '}   
