@@ -11,6 +11,7 @@ import {TagList} from "./tags/TagList";
 import { TagProvider } from "../providers/TagProvider";
 import UserList from "./users/UserList";
 import { UserDetails } from "./users/UserDetail";
+import TagForm from "./tags/TagForm";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -31,6 +32,7 @@ export default function ApplicationViews() {
       <Routes>
         <Route path="/" element={<Hello />} />
         <Route path="/tags" element={<TagList />} />
+        <Route path="/add/tags" element={<TagForm />} />
         <Route path="/users" element={<UserList />} />
         <Route path="/users/:id" element={<UserDetails />} />
       </Routes>

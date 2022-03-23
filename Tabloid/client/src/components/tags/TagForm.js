@@ -1,79 +1,67 @@
 import React, {useContext, useEffect, useState} from "react"
 import { TagContext } from "../../providers/TagProvider"
 import { useNavigate } from "react-router-dom";
-import Post from "./Post";
+import Tag from "./Tag";
+import {Button } from "reactstrap";
 
 
-const PostForm = () => {
-    const {getAllPosts,addPost} = useContext(TagContext)
+const TagForm = () => {
+    const {getAllTags,addTag} = useContext(TagContext)
 
-    const [post, setPost] = useState({
-        title: "",
-        imageUrl: "",
-        caption:"",
-        userProfileId: JSON.parse(localStorage.getItem("gifterUser")).id
-    });
+    const [tag, setTag] = useState({
+        name: "",
+            });
 
     const navigate = useNavigate();
 
     useEffect(()=> {
-        getAllPosts()
+        getAllTags()
     }, []);
 
     // const navigate = useNavigate();
 
     const handleControlledInputChange = (event)=> {
-        const newPost = {...post}
-        newPost[event.target.id] = event.target.value
+        const newTag = {...tag}
+        newTag[event.target.id] = event.target.value
         
-        setPost(newPost)
+        setTag(newTag)
     }
 
-    const handleSavePost = (event) => {
+    const handleSaveTag = (event) => {
         event.preventDefault()
 
-        if(post.title === "" || post.imageUrl ==="" )
+        if(tag.name === "" )
         {
             alert("Please fill out the title and/or image url fields.")
         } else {
-            addPost(post)
-            .then(navigate("/"));
+            addTag(tag)
+            .then(navigate("/tags"));
      }
       
     }
     
     return(
-        <form className="postForm">
+        <form className="tagForm">
             {/* form tags sends http request back to controller so that is why we used preventdefault  - telling form do not send anything to server bc we want to send the http request*/}
-            <h2>New Post</h2>
+            <h2>New Tag</h2>
             <fieldset>
                 <div className="formGroup">
-                <label htmlFor="title">Post Title</label>
-                <input type="text" id="title" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="post title" value={Post.title}/>
+                <label htmlFor="name">Tag Name:</label>
+                <input type="text" id="name" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="Tag Name" value={tag.name}/>
                 </div>
            </fieldset>
-           <fieldset>
-                <div className="formGroup">
-                <label htmlFor="title">Gif Url:</label>
-                <input type="text" id="imageUrl" onChange={handleControlledInputChange} required className="form-control" placeholder="post imageUrl" value={Post.imageUrl}/>
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="formGroup">
-                <label htmlFor="title">Caption:</label>
-                <input type="text" id="caption" onChange={handleControlledInputChange} required  className="form-control" placeholder="post caption" value={Post.caption}/>
-                </div>
-            </fieldset>
-            
-               
+                         
             <div className="form-group row col-sm-12 mx-auto mb-3">
                     <div className="col-sm-12">
-                        <button type="submit" className="btn btn-primary" onClick={handleSavePost}>
-                            Save Post
-                        </button>
+                        <Button primary type="submit" className="btn btn-primary" onClick={handleSaveTag}>
+                            Save Tag
+                        </Button>
+                        <Button outline onClick={() => navigate("/tags")}>
+    Back to List
+  </Button>
                     </div>
                     </div>
         </form>
     )
 }
-export default PostForm;
+export default TagForm;
