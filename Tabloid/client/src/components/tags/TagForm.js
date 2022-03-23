@@ -1,11 +1,11 @@
 import React, {useContext, useEffect, useState} from "react"
-import { PostContext } from "../../providers/PostProvider"
+import { TagContext } from "../../providers/TagProvider"
 import { useNavigate } from "react-router-dom";
 import Post from "./Post";
 
 
 const PostForm = () => {
-    const {getAllPosts,addPost} = useContext(PostContext)
+    const {getAllPosts,addPost} = useContext(TagContext)
 
     const [post, setPost] = useState({
         title: "",
