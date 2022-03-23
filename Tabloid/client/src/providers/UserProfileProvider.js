@@ -18,6 +18,9 @@ export const UserProfileProvider =(props) =>{
       .then(setUserProfiles);
   };
 
+  const getUser = (id) => {
+    return fetch(`${apiUrl}/api/UserProfile/${id}`).then((res) => res.json());
+};
 
   const login = (userObject) => {
     return fetch(`${apiUrl}/api/userprofile/getbyemail?email=${userObject.email}`)
@@ -59,7 +62,7 @@ export const UserProfileProvider =(props) =>{
 
 
   return (
-    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getAllUserProfiles, userProfiles, userProfile, setUserProfiles  }}>
+    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getAllUserProfiles, userProfiles, userProfile, setUserProfiles, getUser  }}>
        {props.children}
     </UserProfileContext.Provider>
   );
