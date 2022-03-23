@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { Card,CardBody, Button } from "reactstrap";
 import { TagProvider } from "../../providers/TagProvider";
 
@@ -8,12 +8,12 @@ const Tag = ({ tagProp }) => {
   
   const { deleteTag, getAllTags } = useContext(TagProvider)
 
-
-  const handleUserTagDelete = () => {
+  const navigate = useNavigate();
+  const handleTagDelete = () => {
     console.log("deleteIdeaIds",tagProp.id)
     deleteTag(tagProp.id)
       .then(() => {
-        Navigate(getAllTags)
+        navigate(getAllTags)
       })
   }
 
@@ -33,6 +33,7 @@ const Tag = ({ tagProp }) => {
   <Button
     color="danger"
     outline
+    onClick={handleTagDelete}
   >
     Delete
   </Button>
