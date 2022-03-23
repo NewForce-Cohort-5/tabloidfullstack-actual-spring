@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using TabloidMVC.Models;
+using TabloidFullStack.Models;
 
 
 using TabloidFullStack.Models;
-using TabloidFullStack.Utils;
+//using TabloidFullStack.Utils;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -12,11 +12,12 @@ namespace TabloidFullStack.Repositories
 {
     public interface IPostRepository
     {
-        //void Add(Post post);
-        //void Delete(int id);
-        List<Post> GetAll();
-        //List<Post> GetAllWithComments();
-        //Post GetById(int id);
-        //void Update(Post post);
+        void Add(Post post);
+        List<Post> GetAllPublishedPosts();
+        Post GetPublishedPostById(int id);
+        Post GetUserPostById(int id, int userProfileId);
+        List<Post> GetUserPostById(int userProfileId);
+        void Delete(int postId);
+        //void UpdatePost(Post post);
     }
 }

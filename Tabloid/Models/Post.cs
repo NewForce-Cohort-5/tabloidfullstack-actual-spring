@@ -1,8 +1,10 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
+using System.ComponentModel;
+using Tabloid.Models;
 
-namespace Gifter.Models
+namespace TabloidFullStack.Models
 {
     public class Post
     {
@@ -14,35 +16,25 @@ namespace Gifter.Models
         [Required]
         public string Content { get; set; }
 
-        [Required]
+        [DisplayName("Header Image URL")]
         public string ImageLocation { get; set; }
 
-        [Required]
         public DateTime CreateDateTime { get; set; }
 
-        [Required]
-        public DateTime PublishDateTime { get; set; }
+        [DisplayName("Published")]
+        [DataType(DataType.Date)]
+        public DateTime? PublishDateTime { get; set; }
+
+        public bool IsApproved { get; set; }
 
         [Required]
-        public int UserProfileId { get; set; }
-
-        //isApproved
-
-        [Required]
+        [DisplayName("Category")]
         public int CategoryId { get; set; }
+        //public Category Category { get; set; }
 
-        [Required]
+        [DisplayName("Author")]
         public int UserProfileId { get; set; }
-
-
-        //[Required]
-        //public string ImageUrl { get; set; }
-
-        //public string Caption { get; set; }
-
-        //public UserProfile UserProfile { get; set; }
-
-        //public List<Comment> Comments { get; set; } = new List<Comment>();
+        public UserProfile UserProfile { get; set; }
 
     }
 }
