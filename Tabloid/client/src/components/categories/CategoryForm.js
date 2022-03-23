@@ -13,8 +13,11 @@ import { useNavigate } from "react-router-dom";
 import {Category} from "./Category.js";
 
 export const CategoryForm = () => {
-    const [category, setCategory] = useState("");
-    const { addCategory, getAllCategories } = useContext(CategoryContext);
+  const { addCategory, getAllCategories } = useContext(CategoryContext);
+    const [category, setCategory] = useState({
+      name: "",
+    });
+    
     
     const navigate = useNavigate();
 
@@ -28,27 +31,31 @@ export const CategoryForm = () => {
       setCategory(newCategory)
   }
 
-  const SaveCategory = (event) => {
+  const handleSaveCategory = (event) => {
     event.preventDefault()
     addCategory(category)
-    .then(navigate("/Category"))
+    .then(navigate("/category"))
 }
 
-      return (
-        <div className="container pt-4">
-          <div className="row justify-content-center">
-            <Card className="col-sm-12 col-lg-6">
-              <CardBody>
-                <Form>
-                  <FormGroup>
-                    <Label for="name">Category Name</Label>
-                    <Input className="form-control" type="text" id="name" onChange={handleControlledInputChange} />
-                  </FormGroup>
-                </Form>
-                <Button className="btn btn-primary" type="submit" onClick={SaveCategory}>Save New Category</Button>
-              </CardBody>
-            </Card>
+return(
+  <form className="categoryForm">
+      <fieldset>
+          <div className="formGroup">
+          <label htmlFor="name">Category Name:</label>
+          <input type="text" id="name" onChange={handleControlledInputChange} className="form-control" value={category.name}/>
           </div>
-        </div>
-      );
+     </fieldset>
+                   
+      <div className="form-group row col-sm-12 mx-auto mb-3">
+              <div className="col-sm-12">
+                  <button primary type="submit" className="btn btn-primary" onClick={handleSaveCategory}>
+                      Save Category
+                  </button>
+                  <button outline onClick={() => navigate("/Category")}>
+              Back to List
+                  </button>
+      </div>
+      </div>
+  </form>
+)
 }
