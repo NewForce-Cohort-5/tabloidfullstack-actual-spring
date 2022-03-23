@@ -9,6 +9,8 @@ import Register from "./Register";
 import Hello from "./Hello";
 import {TagList} from "./tags/TagList";
 import { TagProvider } from "../providers/TagProvider";
+import {PostList} from "./posts/PostList";
+// import { PostProvider } from "../providers/PostProvider";
 import UserList from "./users/UserList";
 import { UserDetails } from "./users/UserDetail";
 
@@ -33,6 +35,7 @@ export default function ApplicationViews() {
         <Route path="/tags" element={<TagList />} />
         <Route path="/users" element={<UserList />} />
         <Route path="/users/:id" element={<UserDetails />} />
+        <Route path="/posts" element={<PostList />} />
       </Routes>
       </TagProvider>
    );

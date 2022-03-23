@@ -15,6 +15,36 @@ namespace TabloidFullStack.Repositories
     public class PostRepository : BaseRepository, IPostRepository
     {
         public PostRepository(IConfiguration config) : base(config) { }
+
+        //public List<Post> GetAllPosts()
+        //{
+        //    using (var conn = Connection)
+        //    {
+        //        conn.Open();
+        //        using (var cmd = conn.CreateCommand())
+        //        {
+        //            cmd.CommandText = @"SELECT id, name 
+        //                        FROM Tag
+        //                        Order by name asc";
+        //            var reader = cmd.ExecuteReader();
+
+        //            var Posts = new List<Post>();
+
+        //            while (reader.Read())
+        //            {
+        //                Posts.Add(new Post()
+        //                {
+        //                    Id = reader.GetInt32(reader.GetOrdinal("Id")),
+        //                    Name = reader.GetString(reader.GetOrdinal("name")),
+        //                });
+        //            }
+
+        //            reader.Close();
+
+        //            return Posts;
+        //        }
+        //    }
+        //}
         public List<Post> GetAllPublishedPosts()
         {
             using (var conn = Connection)
