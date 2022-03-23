@@ -7,7 +7,7 @@ export const Category = ({category}) => {
       
     <Card className="m-4">
     <CardBody>
- <p className="text-left px-2"><strong>Tag Name: </strong></p>
+ <p className="text-left px-2"><strong>Category Name: </strong></p>
  <p>{category.name}</p>
   <Button outline>
     Edit

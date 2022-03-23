@@ -14,8 +14,6 @@ return (
 
 <div className="container">
 
-    <div className="category-titles"><strong>Categories</strong></div>
-    <br></br>
     <div className="categories">
     {categories.map((singleCategoryInLoop) => (
         <Category key={singleCategoryInLoop.id} category={singleCategoryInLoop} />

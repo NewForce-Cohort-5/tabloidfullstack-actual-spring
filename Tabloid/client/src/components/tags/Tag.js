@@ -8,7 +8,7 @@ const Tag = ({ tagProp }) => {
   return (
     <Card className="m-4">
          <CardBody>
-      <p className="text-left px-2"><strong>Category Name: </strong></p>
+      <p className="text-left px-2"><strong>Tag Name: </strong></p>
       <p>{tagProp.name}</p>
       
   <Button outline>
