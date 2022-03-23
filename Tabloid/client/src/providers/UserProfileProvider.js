@@ -4,7 +4,7 @@ import { Spinner } from "reactstrap";
 
 export const UserProfileContext = createContext();
 
-export function UserProfileProvider(props) {
+export const UserProfileProvider =(props) =>{
 
   const apiUrl = "https://localhost:44360";
   const [userProfiles, setUserProfiles] = useState([]);
