@@ -13,22 +13,26 @@ import { useNavigate } from "react-router-dom";
 import {Category} from "./Category.js";
 
 export const CategoryForm = () => {
-    const { addCategory } = useContext(CategoryContext);
-    const [name, setName] = useState("");
-
+    const [category, setCategory] = useState("");
+    const { addCategory, getAllCategories } = useContext(CategoryContext);
     
     const navigate = useNavigate();
 
-    const submit = (e) => {
-        const Category = {
-          name
-        };
+    useEffect(() => {
+      getAllCategories()
+  }, [])
     
-        addCategory(Category).then(() => {
-          // Navigate the user back to the home route
-          navigate("/");
-        });
-      };
+    const handleControlledInputChange = (event) => {
+      const newCategory = {...category}
+      newCategory[event.target.id] = event.target.value
+      setCategory(newCategory)
+  }
+
+  const SaveCategory = (event) => {
+    event.preventDefault()
+    addCategory(category)
+    .then(navigate("/Category"))
+}
 
       return (
         <div className="container pt-4">
@@ -38,15 +42,10 @@ export const CategoryForm = () => {
                 <Form>
                   <FormGroup>
                     <Label for="name">Category Name</Label>
-                    <Input
-                      id="name"
-                      onChange={(e) => setName(e.target.value)}
-                    />
+                    <Input className="form-control" type="text" id="name" onChange={handleControlledInputChange} />
                   </FormGroup>
                 </Form>
-                <Button color="info" onClick={submit}>
-                  SUBMIT
-                </Button>
+                <Button className="btn btn-primary" type="submit" onClick={SaveCategory}>Save New Category</Button>
               </CardBody>
             </Card>
           </div>
