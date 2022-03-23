@@ -12,13 +12,13 @@ export const TagProvider = (props) => {
     
   };
 
-  const addTag = (post) => {
-    return fetch("", {
+  const addTag = (tag) => {
+    return fetch("https://localhost:44360/api/Tag", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(post)
+      body: JSON.stringify(tag)
    
     }).then(getAllTags);
   
