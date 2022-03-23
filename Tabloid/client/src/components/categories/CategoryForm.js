@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
     Form,
     FormGroup,
@@ -13,43 +13,49 @@ import { useNavigate } from "react-router-dom";
 import {Category} from "./Category.js";
 
 export const CategoryForm = () => {
-    const { addCategory } = useContext(CategoryContext);
-    const [name, setName] = useState("");
-
+  const { addCategory, getAllCategories } = useContext(CategoryContext);
+    const [category, setCategory] = useState({
+      name: "",
+    });
+    
     
     const navigate = useNavigate();
 
-    const submit = (e) => {
-        const Category = {
-          name
-        };
+    useEffect(() => {
+      getAllCategories()
+  }, [])
     
-        addCategory(Category).then(() => {
-          // Navigate the user back to the home route
-          navigate("/");
-        });
-      };
+    const handleControlledInputChange = (event) => {
+      const newCategory = {...category}
+      newCategory[event.target.id] = event.target.value
+      setCategory(newCategory)
+  }
 
-      return (
-        <div className="container pt-4">
-          <div className="row justify-content-center">
-            <Card className="col-sm-12 col-lg-6">
-              <CardBody>
-                <Form>
-                  <FormGroup>
-                    <Label for="name">Category Name</Label>
-                    <Input
-                      id="name"
-                      onChange={(e) => setName(e.target.value)}
-                    />
-                  </FormGroup>
-                </Form>
-                <Button color="info" onClick={submit}>
-                  SUBMIT
-                </Button>
-              </CardBody>
-            </Card>
+  const handleSaveCategory = (event) => {
+    event.preventDefault()
+    addCategory(category)
+    .then(navigate("/category"))
+}
+
+return(
+  <form className="categoryForm">
+      <fieldset>
+          <div className="formGroup">
+          <label htmlFor="name">Category Name:</label>
+          <input type="text" id="name" onChange={handleControlledInputChange} className="form-control" value={category.name}/>
           </div>
-        </div>
-      );
+     </fieldset>
+                   
+      <div className="form-group row col-sm-12 mx-auto mb-3">
+              <div className="col-sm-12">
+                  <button primary type="submit" className="btn btn-primary" onClick={handleSaveCategory}>
+                      Save Category
+                  </button>
+                  <button outline onClick={() => navigate("/Category")}>
+              Back to List
+                  </button>
+      </div>
+      </div>
+  </form>
+)
 }

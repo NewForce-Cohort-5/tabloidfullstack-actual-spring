@@ -11,7 +11,6 @@ function App() {
           <Header />
           <ApplicationViews />         
       </UserProfileProvider>
-
     </Router>
   );
 }
