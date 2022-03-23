@@ -127,7 +127,7 @@ namespace Tabloid.Repositories
                     }
                 }
             }
-            public void DeleteTag(int TagId)
+            public void DeleteTag(int id)
             {
                 using (SqlConnection conn = Connection)
                 {
@@ -140,7 +140,7 @@ namespace Tabloid.Repositories
                             WHERE Id = @id
                         ";
 
-                        cmd.Parameters.AddWithValue("@id", TagId);
+                        cmd.Parameters.AddWithValue("@id", id);
 
                         cmd.ExecuteNonQuery();
                     }

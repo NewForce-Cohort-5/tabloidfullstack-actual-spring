@@ -1,10 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
+import { Navigate } from "react-router-dom";
 import { Card,CardBody, Button } from "reactstrap";
+import { TagProvider } from "../../providers/TagProvider";
 
 
 const Tag = ({ tagProp }) => {
-    debugger
-    console.log(tagProp)
+  
+  const { deleteTag, getAllTags } = useContext(TagProvider)
+
+
+  const handleUserTagDelete = () => {
+    console.log("deleteIdeaIds",tagProp.id)
+    deleteTag(tagProp.id)
+      .then(() => {
+        Navigate(getAllTags)
+      })
+  }
+
+
+
+
   return (
     <Card className="m-4">
          <CardBody>
