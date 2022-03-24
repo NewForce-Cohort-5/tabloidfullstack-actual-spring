@@ -11,13 +11,11 @@ const Post = ({ postProp }) => {
 
   return (
     <Card className="m-4">
-      <CardImg top src={postProp.userProfile.imageLocation}  /> 
       <CardBody>
       <p> Post title: <Link to={`/posts/${postProp.id}`}><strong>{postProp.title}</strong> </Link>
       </p>
       <p className="text-left px-0">Posted by: {postProp.userProfile.fullName}</p>
       <p className="text-left px-0">Date posted: {postProp.publishDateTime}</p>
-      <p className="approved">{}</p>
       </CardBody>
     </Card>
   );
