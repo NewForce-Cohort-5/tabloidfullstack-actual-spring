@@ -24,7 +24,7 @@ const CommentList = () => {
     
     <div className="container">
       <div className="row justify-content-center">
-        <div className="col-sm-12 col-lg-6">
+        <div className="m-4">
           <big className="row justify-content-center">{post.title}</big>     
         <ListGroup>
         {post.comments.map(pc => <ListGroupItem key={pc.id}><b>Comment by:</b> {pc.userProfile.displayName} <div><b>Subject:</b> {pc.subject}</div> <b>Content:</b> {pc.content} <div><b>Created:</b> {new Date(pc.createDateTime).toLocaleDateString(
