@@ -33,10 +33,12 @@ export const CategoryProvider = (props) => {
     });
   };
 
-  const deleteCategory = (categoryId) => {
-    return fetch(`/api/post/${categoryId}`, { method: "DELETE" })
-    .then(getAllCategories);
-  };
+  const deleteCategory = (id) => {
+    return fetch(`https://localhost:44360/api/category/${id}`, {
+        method: "DELETE"
+    })
+        .then(getAllCategories)
+}
 
   return (
     <CategoryContext.Provider value={{ categories, getAllCategories, addCategory, editCategory, deleteCategory }}>
