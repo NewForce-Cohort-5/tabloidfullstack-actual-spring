@@ -29,8 +29,8 @@ export const Category = ({category}) => {
         <p className="text-left px-2"><strong>Category Name: </strong></p>
         <p>{category.name}</p>
             
-        <Button outline>
-          Edit
+        <Button outline
+        className="categoryEditButton" onClick={() => navigate(`/category/edit/${category.id}`)}>Edit
         </Button>
         {' '}   
         <Button

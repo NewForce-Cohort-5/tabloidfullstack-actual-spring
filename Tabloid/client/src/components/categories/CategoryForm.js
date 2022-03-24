@@ -9,21 +9,33 @@ import {
     Button,
   } from "reactstrap";
 import { CategoryContext } from "../../providers/CategoryProvider";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {Category} from "./Category.js";
 
 export const CategoryForm = () => {
-  const { addCategory, getAllCategories } = useContext(CategoryContext);
+  const { addCategory, getAllCategories, editCategory, getCategoryById } = useContext(CategoryContext);
     const [category, setCategory] = useState({
       name: "",
     });
-    
+    const [isLoading, setIsLoading] = useState(true);
+
+    const {categoryId} = useParams();
     
     const navigate = useNavigate();
 
     useEffect(() => {
-      getAllCategories()
-  }, [])
+      getAllCategories().then(() => {
+          if (categoryId) {
+              getCategoryById(categoryId)
+              .then(category => {
+                  setCategory(category)
+                  setIsLoading(false)
+              })
+          } else {
+              setIsLoading(false)
+          }
+      })
+
     
     const handleControlledInputChange = (event) => {
       const newCategory = {...category}
