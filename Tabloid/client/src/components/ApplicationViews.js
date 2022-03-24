@@ -12,6 +12,8 @@ import { CategoryForm } from "./categories/CategoryForm";
 import { CategoryProvider } from "../providers/CategoryProvider";
 import {TagList} from "./tags/TagList";
 import { TagProvider } from "../providers/TagProvider";
+import { PostList } from "./posts/PostList";
+import { PostProvider } from "../providers/PostProvider";
 import UserList from "./users/UserList";
 import { UserDetails } from "./users/UserDetail";
 import TagForm from "./tags/TagForm";
@@ -30,6 +32,7 @@ export default function ApplicationViews() {
   }
   else{
    return(
+     <PostProvider>
     <TagProvider>  
       <CategoryProvider>
         <Routes>
@@ -38,6 +41,10 @@ export default function ApplicationViews() {
           <Route path="/category/add" element={ <CategoryForm />} />
           <Route path="/category/delete/:id" element={<CategoryForm />} />        
           <Route path="/users" element={<UserList />} />
+          <Route path="/add/tags" element={<TagForm />} />
+          <Route path="/users/:id" element={<UserDetails />} />
+          <Route path="/tags" element={<TagList />} />
+          <Route path="/posts" element={<PostList />} />
            <Route path="/users/:id" element={<UserDetails />} />
           <Route path="/tags" element={<TagList/>} />
           <Route path="/add/tags/" element={<TagForm />} />
@@ -45,7 +52,9 @@ export default function ApplicationViews() {
         </Routes>
       </CategoryProvider>
     </TagProvider>
-      
+    </PostProvider>  
+
+
    );
   }
 }
