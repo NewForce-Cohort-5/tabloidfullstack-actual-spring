@@ -49,6 +49,7 @@ export default function ApplicationViews() {
           <Route path="/tags" element={<TagList/>} />
           <Route path="/add/tags/" element={<TagForm />} />
           <Route path="/delete/tags/:TagId" element={<TagForm />} />
+          <Route path="tags/edit/:tagId/*" element={<TagForm />} />
         </Routes>
       </CategoryProvider>
     </TagProvider>

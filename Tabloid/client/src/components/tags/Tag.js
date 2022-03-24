@@ -1,5 +1,5 @@
 import { Modal } from "react-bootstrap";
-import React, { useContext,useState } from "react";
+import React, { useContext,useState, useEffect } from "react";
 import {   useNavigate,   } from "react-router-dom";
 import { Card,CardBody, Button } from "reactstrap";
 import { TagContext } from "../../providers/TagProvider";
@@ -9,7 +9,7 @@ const Tag = ({ tagProp }) => {
   
   const { deleteTag } = useContext(TagContext)
 
-  // const [tag, setTag] = useState({})
+  
 
 
     const [show, setShow] = useState(false);
@@ -20,7 +20,6 @@ const Tag = ({ tagProp }) => {
 
   const navigate = useNavigate();
 
-  // const {tagId} = useParams();
 
   const handleTagDelete = () => {
     console.log("deleteTagId",tagProp.id)
@@ -31,14 +30,7 @@ const Tag = ({ tagProp }) => {
             
   }
 
-  // useEffect(() => {
-  //   console.log("useEffect", tagId)
-  //   getTagById(tagId)
-  //   .then((response) => {
-  //     setTag(response)
-  //   })
-  //   }, [])
-
+  
 
   return (
    
@@ -47,7 +39,7 @@ const Tag = ({ tagProp }) => {
       <p className="text-left px-2"><strong>Tag Name: </strong></p>
       <p>{tagProp.name}</p>
       
-  <Button outline>
+  <Button outline onClick={() => navigate(`/tags/edit/${tagProp.id}`)}>
     Edit
   </Button>
   {' '}   
