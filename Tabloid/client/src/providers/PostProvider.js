@@ -8,7 +8,7 @@ export const PostProvider = (props) => {
 
 
   const getPostWithComments = (id) => {
-    return fetch(`https://localhost:44325/GetPostIdWithComments/${id}`).then((res) => res.json());
+    return fetch(`https://localhost:44360/GetPostIdWithComments/${id}`).then((res) => res.json());
 };
 
 return (
