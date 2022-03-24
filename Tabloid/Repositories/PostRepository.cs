@@ -1,11 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 using Tabloid.Models;
 using Tabloid.Utils;
+using TabloidMVC.Models;
 
 namespace Tabloid.Repositories
 {
-    public class CommentRepository
+    public class PostRepository : BaseRepository, IPostRepository
     {
+        public PostRepository(IConfiguration config) : base(config) { }
         public Post GetPostIdWithComments(int id)
         {
             using (var conn = Connection)
@@ -46,12 +49,12 @@ namespace Tabloid.Repositories
                                 Id = DbUtils.GetInt(reader, "PostId"),
                                 Title = DbUtils.GetString(reader, "Title"),
                                 Content = DbUtils.GetString(reader, "Content"),
-                                IsApproved = DbUtils.GetString(reader, "IsApproved"),
-                                CreateDateTime = DbUtils.GetDateTime(reader, "PostDateCreated"),
+/*                                IsApproved = DbUtils.GetNullableInt(reader, "IsApproved"),
+*/                                CreateDateTime = DbUtils.GetDateTime(reader, "PostDateCreated"),
                                 PublishDateTime = DbUtils.GetDateTime(reader, "PublishDateTime"),
                                 ImageLocation = DbUtils.GetString(reader, "PostImageUrl"),
                                 UserProfileId = DbUtils.GetInt(reader, "PostUserProfileId"),
-                                CategoryId = DbUtils.GetInt(reader, "PostUserCategoryId"),
+                                CategoryId = DbUtils.GetInt(reader, "PostCategoryId"),
                                 Category = new Category()
                                 {
                                     Id = DbUtils.GetInt(reader, "PostCategoryId"),
@@ -93,7 +96,7 @@ namespace Tabloid.Repositories
                                     Id = DbUtils.GetInt(reader, "CommentUserProfileId"),
                                     FirstName = DbUtils.GetString(reader, "CommentUserFirstName"),
                                     LastName = DbUtils.GetString(reader, "CommentUserLastName"),
-                                    DisplayName = DbUtils.GetString(reader, "CommentUserDisplayName"),
+                                    DisplayName = DbUtils.GetString(reader, "CommentUserName"),
                                     Email = DbUtils.GetString(reader, "CommentUserEmail"),
                                     ImageLocation = DbUtils.GetString(reader, "CommentUserProfileImageUrl"),
                                 }

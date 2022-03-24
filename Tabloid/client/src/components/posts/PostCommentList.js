@@ -1,20 +1,19 @@
 import React, { useEffect, useContext, useState } from "react";
 import { ListGroup, ListGroupItem } from "reactstrap";
-import { UserProfileContext } from "../providers/UserProfileProvider";
 import { useParams } from "react-router-dom";
 import Post from "./Post";
-import PostDetails from "./PostDetails";
-import { PostContext } from "../providers/PostProvider";
+import { PostContext } from "../../providers/PostProvider";
+
 
 const CommentList = () => {
   const [post, setPost] = useState();
-  const { getUser } = useContext(UserProfileContext);
+  const { getPostWithComments } = useContext(PostContext);
   const { id } = useParams();
 
   
 
   useEffect(() => {
-    getPost(id).then(setPost);
+    getPostWithComments(id).then(setPost);
   }, []);
 
   if (!post) {
@@ -26,9 +25,9 @@ const CommentList = () => {
       <div className="row justify-content-center">
         <div className="col-sm-12 col-lg-6">
           <ListGroup>
-            {post.comments.map((c) => (
-              <Comment key={c.id} comment={c} />
-            ))}
+            
+              <Post key={post.id} comment={post} />
+            
           </ListGroup>
         </div>
       </div>
@@ -36,4 +35,4 @@ const CommentList = () => {
   );
 };
 
-export default UserPosts;
+export default CommentList;
