@@ -24,18 +24,11 @@ export const CategoryForm = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-      getAllCategories().then(() => {
-          if (categoryId) {
-              getCategoryById(categoryId)
-              .then(category => {
-                  setCategory(category)
-                  setIsLoading(false)
-              })
-          } else {
-              setIsLoading(false)
-          }
-      })
-
+      getCategoryById().then(category => {
+        setCategory(category)
+        setIsLoading(false)
+    })
+    }, [])
     
     const handleControlledInputChange = (event) => {
       const newCategory = {...category}
@@ -45,11 +38,23 @@ export const CategoryForm = () => {
 
   const handleSaveCategory = (event) => {
     event.preventDefault()
-    addCategory(category)
-    .then(navigate("/category"))
-}
+    if (categoryId) {
+        debugger
+        editCategory({
+            id: category.id,
+            name: category.name
+        })
+        .then(() => navigate(`/category`))
+    } else {
+        debugger
+        addCategory({
+            name: category.name
+        })
+        .then(() => navigate(`/category`))
+    }
+  }
 
-return(
+return (
   <form className="categoryForm">
       <fieldset>
           <div className="formGroup">
@@ -69,5 +74,5 @@ return(
       </div>
       </div>
   </form>
-)
+  )
 }
