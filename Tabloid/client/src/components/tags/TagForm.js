@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react"
 import { TagContext } from "../../providers/TagProvider"
 import { useNavigate } from "react-router-dom";
-import Tag from "./Tag";
+// import Tag from "./Tag";
 import {Button } from "reactstrap";
 
 
