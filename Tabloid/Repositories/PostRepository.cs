@@ -32,7 +32,7 @@ namespace Tabloid.Repositories
                        LEFT JOIN UserProfile cup on c.UserProfileId = cup.Id
                        LEFT JOIN Category ca on ca.Id = p.CategoryId
                        WHERE p.Id = @Id
-                       ORDER BY p.CreateDateTime DESC";
+                       ORDER BY c.CreateDateTime DESC";
 
                     DbUtils.AddParameter(cmd, "@Id", id);
 
