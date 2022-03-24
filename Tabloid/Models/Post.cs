@@ -1,10 +1,11 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using Tabloid.Models;
 
-namespace TabloidMVC.Models
+namespace TabloidFullStack.Models
 {
     public class Post
     {

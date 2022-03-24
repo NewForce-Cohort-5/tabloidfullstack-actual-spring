@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Tabloid.Repositories;
+using TabloidFullStack.Repositories;
 
 namespace Tabloid
 {

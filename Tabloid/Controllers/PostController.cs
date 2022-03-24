@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using TabloidFullStack.Repositories;
 using System.Collections.Generic;
 using Tabloid.Repositories;
 
@@ -10,53 +12,70 @@ namespace Tabloid.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        private readonly IPostRepository _postRepo;
-
+        private readonly IPostRepository _postRepository;
         public PostController(IPostRepository postRepository)
         {
-            _postRepo = postRepository;
-        }
-        // GET: api/<PostController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
+            _postRepository = postRepository;
         }
 
-        // GET api/<PostController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet]
+        public IActionResult Get()
         {
-            return "value";
+            return Ok(_postRepository.GetAllPublishedPosts());
         }
+
+        //[HttpGet("{id}")]
+        //public IActionResult Get(int id)
+        //{
+        //    var post = _postRepository.GetPostById(id);
+        //    if (post == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return Ok(post);
+        //}
 
         [HttpGet("/GetPostIdWithComments/{id}")]
         public IActionResult GetPostIdWithComments(int id)
         {
-            var post = _postRepo.GetPostIdWithComments(id);
+            var post = _postRepository.GetPostIdWithComments(id);
             if (post == null)
             {
                 return NotFound();
             }
             return Ok(post);
         }
+        //[HttpGet("GetWithComments")]
+        //public IActionResult GetWithComments()
+        //{
+        //    var posts = _postRepository.GetAllWithComments();
+        //    return Ok(posts);
+        //}
 
-        // POST api/<PostController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
-        }
+        //[HttpPost]
+        //public IActionResult Post(Post post)
+        //{
+        //    _postRepository.Add(post);
+        //    return CreatedAtAction("Get", new { id = post.Id }, post);
+        //}
 
-        // PUT api/<PostController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        //[HttpPut("{id}")]
+        //public IActionResult Put(int id, Post post)
+        //{
+        //    if (id != post.Id)
+        //    {
+        //        return BadRequest();
+        //    }
 
-        // DELETE api/<PostController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        //    _postRepository.Update(post);
+        //    return NoContent();
+        //}
+
+        //[HttpDelete("{id}")]
+        //public IActionResult Delete(int id)
+        //{
+        //    _postRepository.Delete(id);
+        //    return NoContent();
+        //}
     }
 }
