@@ -34,8 +34,9 @@ export default function ApplicationViews() {
       <CategoryProvider>
         <Routes>
           <Route path="/" element={<Hello />} />
-          <Route path="/Category" element={ <CategoryList />} />
-          <Route path="/category/add" element={ <CategoryForm />} />        
+          <Route path="/category" element={ <CategoryList />} />
+          <Route path="/category/add" element={ <CategoryForm />} />
+          <Route path="/category/delete/:id" element={<CategoryForm />} />        
           <Route path="/users" element={<UserList />} />
            <Route path="/users/:id" element={<UserDetails />} />
           <Route path="/tags" element={<TagList/>} />
