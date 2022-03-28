@@ -23,15 +23,20 @@ export const CategoryProvider = (props) => {
     }).then(getAllCategories);
   };
 
-  const editCategory = (category) => {
-    return fetch(`/api/category/${category.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(category)
-    });
-  };
+  const editCategory = category => {
+    return fetch(`https://localhost:44360/api/Category/${category.id}`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(category)
+    }).then(getAllCategories)
+  }
+
+const getCategoryById = (id) => {
+  return fetch (`https://localhost:44360/api/Category/${id}`)
+  .then(res => res.json())
+}
 
   const deleteCategory = (id) => {
     return fetch(`https://localhost:44360/api/category/${id}`, {
@@ -41,7 +46,7 @@ export const CategoryProvider = (props) => {
 }
 
   return (
-    <CategoryContext.Provider value={{ categories, getAllCategories, addCategory, editCategory, deleteCategory }}>
+    <CategoryContext.Provider value={{ categories, getAllCategories, addCategory, editCategory, getCategoryById, deleteCategory }}>
       {props.children}
     </CategoryContext.Provider>
   );

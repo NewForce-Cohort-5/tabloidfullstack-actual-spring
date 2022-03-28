@@ -24,26 +24,18 @@ const navigate = useNavigate();
 
 return (
 
-<div className="container">
+<div className="containerForCategories">
 
-    <Button id="addCategory" onClick={() => {
+    <Button outline id="addCategory" onClick={() => {
         navigate("/category/add")
-    }}>Add new category</Button>
+    }}>Add new category</Button> {' '} 
 
-    <div className="categories">
     {categories.map((singleCategoryInLoop) => (
         <Category key={singleCategoryInLoop.id} category={singleCategoryInLoop} />
     ))}
 
     </div>
-</div>
-
-
-
-
+    
 )
-
-
-
 }
 

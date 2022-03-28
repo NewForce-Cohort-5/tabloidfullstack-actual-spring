@@ -2,6 +2,7 @@
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Tabloid.Models;
+using Tabloid.Utils;
 
 namespace Tabloid.Repositories
 {
@@ -35,40 +36,37 @@ namespace Tabloid.Repositories
                 }
             }
         }
-        public Category GetCategoryById(int id)
+        public Category GetById(int id)
         {
-            using (SqlConnection conn = Connection)
+            using (var conn = Connection)
             {
                 conn.Open();
-                using (SqlCommand cmd = conn.CreateCommand())
+                using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                        SELECT Id, [Name]
-                        FROM Category
-                        WHERE Id = @id
-                    ";
+                              SELECT Category.Name
+                                FROM Category
+                            LEFT JOIN Post on Post.CategoryId = Category.Id
+                                WHERE Category.Id = @Id";
 
-                    cmd.Parameters.AddWithValue("@id", id);
+                    DbUtils.AddParameter(cmd, "@Id", id);
 
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-                    if (reader.Read())
+                    var reader = cmd.ExecuteReader();
+                    Category category = null;
+                    while (reader.Read())
                     {
-                        Category category = new Category
+                        if (category == null)
                         {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Name = reader.GetString(reader.GetOrdinal("Name")),
+                            category = new Category()
+                            {
+                                Id = id,
+                                Name = DbUtils.GetString(reader, "Name")
+                            };
+                        }
 
-                        };
-
-                        reader.Close();
-                        return category;
                     }
-                    else
-                    {
-                        reader.Close();
-                        return null;
-                    }
+                    reader.Close();
+                    return category;
                 }
             }
         }
@@ -91,20 +89,18 @@ namespace Tabloid.Repositories
         }
         public void Update(Category category)
         {
-            using (SqlConnection conn = Connection)
+            using (var conn = Connection)
             {
                 conn.Open();
-
-                using (SqlCommand cmd = conn.CreateCommand())
+                using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                            UPDATE Category
-                            SET 
-                                [Name] = @name 
-                            WHERE Id = @id";
+                                UPDATE Category
+                                SET Name = @name
+                                WHERE Id = @id";
 
-                    cmd.Parameters.AddWithValue("@name", category.Name);
-                    cmd.Parameters.AddWithValue("@id", category.Id);
+                    DbUtils.AddParameter(cmd, "@name", category.Name);
+                    DbUtils.AddParameter(cmd, "@id", category.Id);
 
                     cmd.ExecuteNonQuery();
                 }
