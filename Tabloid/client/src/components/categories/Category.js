@@ -9,12 +9,13 @@ export const Category = ({category}) => {
 
   //modal from boostrap
   const [show, setShow] = useState(false);
-  
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
 
   const navigate = useNavigate();
 
+  
   const categoryDelete = () => {
     deleteCategory(category.id)
       
@@ -29,10 +30,9 @@ export const Category = ({category}) => {
         <p className="text-left px-2"><strong>Category Name: </strong></p>
         <p>{category.name}</p>
             
-        <Button outline
+        <Button 
         className="categoryEditButton" onClick={() => navigate(`/category/edit/${category.id}`)}>Edit
-        </Button>
-        {' '}   
+        </Button>   
         <Button
           color="danger"
           outline
