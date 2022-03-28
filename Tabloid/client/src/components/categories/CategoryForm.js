@@ -9,21 +9,31 @@ import {
     Button,
   } from "reactstrap";
 import { CategoryContext } from "../../providers/CategoryProvider";
-import { useNavigate } from "react-router-dom";
-import {Category} from "./Category.js";
+import { useNavigate, useParams } from "react-router-dom";
+
 
 export const CategoryForm = () => {
-  const { addCategory, getAllCategories } = useContext(CategoryContext);
-    const [category, setCategory] = useState({
-      name: "",
-    });
-    
+  const { addCategory, editCategory, getCategoryById } = useContext(CategoryContext);
+  
+    const [category, setCategory] = useState({});
+
+    const [isLoading, setIsLoading] = useState(true);
+
+    const {categoryId} = useParams();
     
     const navigate = useNavigate();
 
-    useEffect(() => {
-      getAllCategories()
-  }, [])
+    useEffect(()=> {
+        if(categoryId){
+            getCategoryById(categoryId)
+            .then(category => {
+              setCategory(category)
+              setIsLoading(false)
+            })
+          } else {
+            setIsLoading (false)
+          }}, [])
+
     
     const handleControlledInputChange = (event) => {
       const newCategory = {...category}
@@ -32,12 +42,29 @@ export const CategoryForm = () => {
   }
 
   const handleSaveCategory = (event) => {
-    event.preventDefault()
-    addCategory(category)
-    .then(navigate("/category"))
+      
+
+    if(category.name === "" )
+    {
+        alert("Please enter a valid category name.")
+    } else {
+        setIsLoading(true);
+        if (categoryId){
+            editCategory({
+                id: category.id,
+                name: category.name
+            })
+            .then(()=> navigate("/Category"))
+        } else {
+        addCategory({
+            name: category.name
+        })
+        .then(navigate("/Category"));
+        }
+    }
 }
 
-return(
+return (
   <form className="categoryForm">
       <fieldset>
           <div className="formGroup">
@@ -48,14 +75,18 @@ return(
                    
       <div className="form-group row col-sm-12 mx-auto mb-3">
               <div className="col-sm-12">
-                  <button primary type="submit" className="btn btn-primary" onClick={handleSaveCategory}>
-                      Save Category
-                  </button>
-                  <button outline onClick={() => navigate("/Category")}>
+                        <Button primary 
+                              disabled={isLoading} 
+                              type="submit" className="btn btn-primary" onClick={event => {
+                                event.preventDefault()
+                                 handleSaveCategory()}}>
+                              {categoryId ? <>Save Category</> : <>Add Category</>}
+                        </Button>
+                  <Button outline onClick={() => navigate("/Category")}>
               Back to List
-                  </button>
+                  </Button>
       </div>
       </div>
   </form>
-)
+  )
 }
