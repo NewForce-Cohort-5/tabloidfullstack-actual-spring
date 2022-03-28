@@ -12,11 +12,16 @@ export const PostProvider = (props) => {
     
   };
 
+  const getPostWithComments = (id) => {
+    return fetch(`https://localhost:44360/GetPostIdWithComments/${id}`).then((res) => res.json());
+};
+
+
 
   
   
   return (
-    <PostContext.Provider value={{ posts, GetAllPublishedPosts}}>
+    <PostContext.Provider value={{ posts, GetAllPublishedPosts, getPostWithComments}}>
       {props.children}
     </PostContext.Provider>
   );
