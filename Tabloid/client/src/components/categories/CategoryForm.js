@@ -25,7 +25,6 @@ export const CategoryForm = () => {
 
     useEffect(()=> {
         if(categoryId){
-          debugger
             getCategoryById(categoryId)
             .then(category => {
               setCategory(category)
@@ -51,14 +50,12 @@ export const CategoryForm = () => {
     } else {
         setIsLoading(true);
         if (categoryId){
-         debugger
             editCategory({
                 id: category.id,
                 name: category.name
             })
             .then(()=> navigate("/Category"))
         } else {
-          debugger
         addCategory({
             name: category.name
         })
