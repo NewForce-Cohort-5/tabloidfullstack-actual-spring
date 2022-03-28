@@ -14,9 +14,11 @@ import {TagList} from "./tags/TagList";
 import { TagProvider } from "../providers/TagProvider";
 import { PostList } from "./posts/PostList";
 import { PostProvider } from "../providers/PostProvider";
+import { PostDetail } from "./posts/PostDetail";
 import UserList from "./users/UserList";
 import { UserDetails } from "./users/UserDetail";
 import TagForm from "./tags/TagForm";
+// import UserPosts from "./posts/UserPosts";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -32,6 +34,7 @@ export default function ApplicationViews() {
   }
   else{
    return(
+     <UserProfileProvider>
      <PostProvider>
     <TagProvider>  
       <CategoryProvider>
@@ -41,18 +44,18 @@ export default function ApplicationViews() {
           <Route path="/category/add" element={ <CategoryForm />} />
           <Route path="/category/delete/:id" element={<CategoryForm />} />        
           <Route path="/users" element={<UserList />} />
-          <Route path="/add/tags" element={<TagForm />} />
           <Route path="/users/:id" element={<UserDetails />} />
           <Route path="/tags" element={<TagList />} />
-          <Route path="/posts" element={<PostList />} />
-           <Route path="/users/:id" element={<UserDetails />} />
-          <Route path="/tags" element={<TagList/>} />
-          <Route path="/add/tags/" element={<TagForm />} />
+          <Route path="/add/tags" element={<TagForm />} />
           <Route path="/delete/tags/:TagId" element={<TagForm />} />
+          <Route path="/posts" element={<PostList />} />
+          <Route path="/posts/:id" element={<PostDetail />} />
+          {/* <Route path="/myposts" element={<UserPosts />} /> */}
         </Routes>
       </CategoryProvider>
     </TagProvider>
-    </PostProvider>  
+    </PostProvider>
+    </UserProfileProvider>
 
 
    );

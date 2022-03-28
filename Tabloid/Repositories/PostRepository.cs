@@ -120,93 +120,12 @@ namespace TabloidFullStack.Repositories
 
                     reader.Close();
 
-                    return post;
+                        return post;
                 }
             }
         }
 
-        public Post GetUserPostById(int id, int userProfileId)
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                       SELECT p.Id, p.Title, p.Content, 
-                              p.ImageLocation AS HeaderImage,
-                              p.CreateDateTime, p.PublishDateTime, p.IsApproved,
-                              p.CategoryId, p.UserProfileId,
-                              c.[Name] AS CategoryName,
-                              u.FirstName, u.LastName, u.DisplayName, 
-                              u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
-                              u.UserTypeId, 
-                              ut.[Name] AS UserTypeName
-                         FROM Post p
-                              LEFT JOIN Category c ON p.CategoryId = c.id
-                              LEFT JOIN UserProfile u ON p.UserProfileId = u.id
-                              LEFT JOIN UserType ut ON u.UserTypeId = ut.id
-                        WHERE p.id = @id AND p.UserProfileId = @userProfileId";
 
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.Parameters.AddWithValue("@userProfileId", userProfileId);
-                    var reader = cmd.ExecuteReader();
-
-                    Post post = null;
-
-                    if (reader.Read())
-                    {
-                        post = NewPostFromReader(reader);
-                    }
-
-                    reader.Close();
-
-                    return post;
-                }
-            }
-        }
-
-        //this is for ALL posts of both published and unpublished by the userId and this is used for print a list after the user clicks my post in the menu
-        public List<Post> GetUserPostById(int userProfileId)
-        {
-            using (var conn = Connection)
-            {
-                conn.Open();
-                using (var cmd = conn.CreateCommand())
-                {
-                    cmd.CommandText = @"
-                       SELECT p.Id, p.Title, p.Content, 
-                              p.ImageLocation AS HeaderImage,
-                              p.CreateDateTime, p.PublishDateTime, p.IsApproved,
-                              p.CategoryId, p.UserProfileId,
-                              c.[Name] AS CategoryName,
-                              u.FirstName, u.LastName, u.DisplayName, 
-                              u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
-                              u.UserTypeId, 
-                              ut.[Name] AS UserTypeName
-                         FROM Post p
-                              LEFT JOIN Category c ON p.CategoryId = c.id
-                              LEFT JOIN UserProfile u ON p.UserProfileId = u.id
-                              LEFT JOIN UserType ut ON u.UserTypeId = ut.id
-                        WHERE p.UserProfileId = @userProfileId
-                        ORDER By p.CreateDateTime Desc";
-
-                    cmd.Parameters.AddWithValue("@userProfileId", userProfileId);
-                    var reader = cmd.ExecuteReader();
-
-                    var posts = new List<Post>();
-
-                    while (reader.Read())
-                    {
-                        posts.Add(NewPostFromReader(reader));
-                    }
-
-                    reader.Close();
-
-                    return posts;
-                }
-            }
-        }
 
         public void Add(Post post)
         {

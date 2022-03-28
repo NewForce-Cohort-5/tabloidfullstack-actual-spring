@@ -1,13 +1,9 @@
 import React from "react";
-import { Card, CardImg, CardBody } from "reactstrap";
+import { Card, CardBody } from "reactstrap";
 import { Link } from "react-router-dom";
 
-const Post = ({ postProp }) => {
+export const Post = ({ postProp }) => {
     
-
-  // let date = (userProfile.publishDateTime);
-  // let array = date.split('-').reverse().join('.')
-  // var postDate = (array[12] + array[13] + "/" + array[0] + array[1]+ "/"+ array[15]+ array[16]+ array[17]+ array[18]);
 
   return (
     <Card className="m-4">
@@ -20,8 +16,6 @@ const Post = ({ postProp }) => {
     </Card>
   );
 };
-export default Post;
-
 
 
 

@@ -1,36 +1,31 @@
 import React, { useEffect, useContext, useState } from "react";
 import { ListGroup, ListGroupItem } from "reactstrap";
-import { PostContext } from "../providers/PostProvider";
+import { PostContext } from "../../providers/PostProvider"; 
 import { useParams } from "react-router-dom";
-import Post from "./Post";
+import { Post } from "./Post";
 
-const PostDetails = () => {
-  const [post, setPost] = useState();
-  const { getPost } = useContext(PostContext);
+export const PostDetail = () => {
+  const [post, setPost] = useState({});
+  const { GetPostsById } = useContext(PostContext);
   const { id } = useParams();
 
   useEffect(() => {
-    getPost(id).then(setPost);
+    GetPostsById(id).then(setPost);
   }, []);
-
-  if (!post) {
-    return null;
-  }
 
   return (
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-sm-12 col-lg-6">
-          <Post post={post} />
+          {/* <Post post={post} />
           <ListGroup>
             {post.comments.map((c) => (
               <ListGroupItem>{c.message}</ListGroupItem>
             ))}
-          </ListGroup>
+          </ListGroup> */}
+          <strong>Post title: {post.title}</strong>
         </div>
       </div>
     </div>
   );
 };
-
-export default PostDetails;
