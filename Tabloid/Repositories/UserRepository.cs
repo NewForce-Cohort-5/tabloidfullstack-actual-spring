@@ -149,7 +149,22 @@ namespace Tabloid.Repositories
                     }
                 };
             }
-        }
+            public void DeactivateUserProfile(int id)
+            {
+                using (var conn = Connection)
+                {
+                    conn.Open();
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        cmd.CommandText = @"UPDATE UserProfile
+                                            SET UserTypeId = 3
+                                            Where Id = @Id";
+                        cmd.Parameters.AddWithValue("@Id", id);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+    }
 
     }
 
