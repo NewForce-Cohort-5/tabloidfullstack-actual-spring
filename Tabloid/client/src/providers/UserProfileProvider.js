@@ -7,6 +7,7 @@ export const UserProfileProvider =(props) =>{
 
   const apiUrl = "https://localhost:44360";
   const [userProfiles, setUserProfiles] = useState([]);
+  const [httpStatusCode, setHttpStatusCode] = useState([]);
   const userProfile = sessionStorage.getItem("userProfile");
   const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null);
 
@@ -21,9 +22,6 @@ export const UserProfileProvider =(props) =>{
     return fetch(`${apiUrl}/api/UserProfile/${id}`).then((res) => res.json());
 };
 
-const getPostWithComments = (id) => {
-  return fetch(`https://localhost:44325/GetPostIdWithComments/${id}`).then((res) => res.json());
-};
 
   const login = (userObject) => {
     return fetch(`${apiUrl}/api/userprofile/getbyemail?email=${userObject.email}`)
@@ -47,7 +45,8 @@ const getPostWithComments = (id) => {
   };
 
   const register = (userObject, password) => {
-    return  fetch(`${apiUrl}/api/userprofile`, {
+   
+      return  fetch(`${apiUrl}/api/userprofile`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -59,6 +58,8 @@ const getPostWithComments = (id) => {
         sessionStorage.setItem("userProfile", JSON.stringify(savedUserProfile))
         setIsLoggedIn(true);
       });
+ 
+
   };
 
 

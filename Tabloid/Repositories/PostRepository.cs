@@ -98,7 +98,7 @@ namespace TabloidFullStack.Repositories
                        p.ImageLocation AS PostImageUrl, p.UserProfileId AS PostUserProfileId, p.PublishDateTime, p.IsApproved, p.CategoryId AS PostCategoryId,
                        up.DisplayName, up.FirstName, up.LastName, up.Email, up.CreateDateTime AS UserProfileDateCreated,
                        up.ImageLocation AS UserProfileImageUrl, up.UserTypeId,
-                       c.Id AS CommentId, c.Content, c.UserProfileId AS CommentUserProfileId, c.PostId as CommentPostId, c.Subject, c.CreateDateTime as CommentDateTime,
+                       c.Id AS CommentId, c.Content as CommentContent, c.UserProfileId AS CommentUserProfileId, c.PostId as CommentPostId, c.Subject, c.CreateDateTime as CommentDateTime,
                        cup.DisplayName as CommentUserName, cup.FirstName as CommentUserFirstName, cup.LastName as CommentUserLastName, cup.Email as CommentUserEmail, cup.CreateDateTime AS CommentUserProfileDateCreated,
                        cup.ImageLocation AS CommentUserProfileImageUrl, cup.UserTypeId as CommentUserTypeId,
                        ca.Name as PostCategoryName, ca.Id as PostCategoryId
@@ -165,7 +165,7 @@ namespace TabloidFullStack.Repositories
                             {
                                 Id = DbUtils.GetInt(reader, "CommentId"),
                                 Subject = DbUtils.GetString(reader, "Subject"),
-                                Content = DbUtils.GetString(reader, "Content"),
+                                Content = DbUtils.GetString(reader, "CommentContent"),
                                 PostId = DbUtils.GetInt(reader, "PostId"),
                                 CreateDateTime = DbUtils.GetDateTime(reader, "CommentDateTime"),
                                 UserProfileId = DbUtils.GetInt(reader, "CommentUserProfileId"),
@@ -196,14 +196,14 @@ namespace TabloidFullStack.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                       SELECT p.Id, p.Title, p.Content, 
+                       SELECT p.Id, p.Title, p.Content,
                               p.ImageLocation AS HeaderImage,
                               p.CreateDateTime, p.PublishDateTime, p.IsApproved,
                               p.CategoryId, p.UserProfileId,
                               c.[Name] AS CategoryName,
-                              u.FirstName, u.LastName, u.DisplayName, 
+                              u.FirstName, u.LastName, u.DisplayName,
                               u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
-                              u.UserTypeId, 
+                              u.UserTypeId,
                               ut.[Name] AS UserTypeName
                          FROM Post p
                               LEFT JOIN Category c ON p.CategoryId = c.id
@@ -211,20 +211,15 @@ namespace TabloidFullStack.Repositories
                               LEFT JOIN UserType ut ON u.UserTypeId = ut.id
                         WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME()
                               AND p.id = @id";
-
                     cmd.Parameters.AddWithValue("@id", id);
                     var reader = cmd.ExecuteReader();
-
                     Post post = null;
-
                     if (reader.Read())
                     {
                         post = NewPostFromReader(reader);
                     }
-
                     reader.Close();
-
-                        return post;
+                    return post;
                 }
             }
         }

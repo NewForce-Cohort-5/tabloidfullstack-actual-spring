@@ -49,13 +49,21 @@ namespace Tabloid.Controllers
         [HttpPost]
         public IActionResult Post(UserProfile userProfile)
         {
-            userProfile.CreateDateTime = DateTime.Now;
+            var user = _userRepository.GetByEmail(userProfile.Email);
+
+            if (userProfile.Email != user.Email) { 
+
+                userProfile.CreateDateTime = DateTime.Now;
             userProfile.UserTypeId = UserType.AUTHOR_ID;
             _userRepository.Add(userProfile);
             return CreatedAtAction(
                 "GetByEmail",
                 new { email = userProfile.Email },
-                userProfile);
+                userProfile); }
+            else {
+                return NotFound();
+                    }
+            
         }
     }
 }
