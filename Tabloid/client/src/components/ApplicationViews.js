@@ -52,19 +52,14 @@ export default function ApplicationViews() {
           <Route path="/users/:id" element={<UserDetails />} />
 
           <Route path="/tags" element={<TagList />} />
-          <Route path="/posts" element={<PostList />} />
-          <Route path="/post/comments/:id/*" element={<CommentList />} />
-          <Route path="/users/:id" element={<UserDetails />} />
-          <Route path="/tags" element={<TagList/>} />
           <Route path="/add/tags/" element={<TagForm />} />
-          <Route path="/add/tags" element={<TagForm />} />
           <Route path="/delete/tags/:TagId" element={<TagForm />} />
           <Route path="tags/edit/:tagId/*" element={<TagForm />} />
 
           <Route path="/posts" element={<PostList />} />
           <Route path="/posts/:id" element={<PostDetail />} />
           {/* <Route path="/myposts" element={<UserPosts />} /> */}
-          <Route path="/post/comments/:id" element={<CommentList />} />
+          <Route path="/post/comments/:id/*" element={<CommentList />} />
           
         </Routes>
         </CommentProvider>

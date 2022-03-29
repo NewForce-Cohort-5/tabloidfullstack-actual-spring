@@ -1,7 +1,7 @@
 import React, { useEffect, useContext, useState } from "react";
 import { ListGroup, ListGroupItem } from "reactstrap";
 import { PostContext } from "../../providers/PostProvider"; 
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { Post } from "./Post";
 
 export const PostDetail = () => {
@@ -23,7 +23,7 @@ export const PostDetail = () => {
               <ListGroupItem>{c.message}</ListGroupItem>
             ))}
           </ListGroup> */}
-          <strong>Post title: {singlePost.title}</strong>
+          <Link to={`/post/comments/${singlePost.id}`}><strong>{singlePost.title}</strong> </Link>
           <div><img src={singlePost.imageLocation} alt="post-image"></img></div>
           <p>{singlePost.content}</p>
           <strong> Published on: {new Date(singlePost.publishDateTime).toLocaleDateString('en-us')}</strong>
