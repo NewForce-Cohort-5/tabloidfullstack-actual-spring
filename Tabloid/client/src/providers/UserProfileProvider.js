@@ -7,6 +7,7 @@ export const UserProfileProvider =(props) =>{
 
   const apiUrl = "https://localhost:44360";
   const [userProfiles, setUserProfiles] = useState([]);
+  const [httpStatusCode, setHttpStatusCode] = useState([]);
   const userProfile = sessionStorage.getItem("userProfile");
   const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null);
 
@@ -44,7 +45,8 @@ export const UserProfileProvider =(props) =>{
   };
 
   const register = (userObject, password) => {
-    return  fetch(`${apiUrl}/api/userprofile`, {
+   
+      return  fetch(`${apiUrl}/api/userprofile`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -56,6 +58,8 @@ export const UserProfileProvider =(props) =>{
         sessionStorage.setItem("userProfile", JSON.stringify(savedUserProfile))
         setIsLoggedIn(true);
       });
+ 
+
   };
 
 
