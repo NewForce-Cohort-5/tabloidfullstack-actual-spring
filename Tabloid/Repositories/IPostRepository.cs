@@ -20,5 +20,6 @@ namespace TabloidFullStack.Repositories
         
         void Delete(int postId);
         //void UpdatePost(Post post);
+        Post GetPostIdWithComments(int id);
     }
 }
