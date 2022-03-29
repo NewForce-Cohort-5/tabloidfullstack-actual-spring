@@ -50,12 +50,12 @@ namespace Tabloid.Controllers
             }
             return Ok(post);
         }
-        //[HttpGet("GetWithComments")]
-        //public IActionResult GetWithComments()
-        //{
-        //    var posts = _postRepository.GetAllWithComments();
-        //    return Ok(posts);
-        //}
+        [HttpGet("GetWithComments")]
+        public IActionResult GetWithComments()
+        {
+            var posts = _postRepository.GetAllWithComments();
+            return Ok(posts);
+        }
 
         //[HttpPost]
         //public IActionResult Post(Post post)
