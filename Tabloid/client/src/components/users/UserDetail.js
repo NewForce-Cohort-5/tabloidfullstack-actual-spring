@@ -20,7 +20,7 @@ export const UserDetails = () => {
   if (!userProfile) {
     return null;
   }
-  //formatting date for now with an array
+  //formatting date for now with an array, splitting, reversing, and joining
   let date = (userProfile.createDateTime);
   let array = date.split('-').reverse().join('.')
   var userDate = (array[12] + array[13] + "/" + array[0] + array[1]+ "/"+ array[15]+ array[16]+ array[17]+ array[18]);

@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using Tabloid.Models;
 
 namespace TabloidFullStack.Models
@@ -30,11 +31,12 @@ namespace TabloidFullStack.Models
         [Required]
         [DisplayName("Category")]
         public int CategoryId { get; set; }
-        //public Category Category { get; set; }
+        public Category Category { get; set; }
 
         [DisplayName("Author")]
         public int UserProfileId { get; set; }
         public UserProfile UserProfile { get; set; }
 
+        public List <Comment> Comments { get; set; }
     }
 }

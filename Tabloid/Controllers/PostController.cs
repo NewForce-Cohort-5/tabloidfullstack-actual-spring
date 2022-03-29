@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TabloidFullStack.Repositories;
+using System.Collections.Generic;
+using Tabloid.Repositories;
+
+// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace Tabloid.Controllers
 {
@@ -19,18 +23,33 @@ namespace Tabloid.Controllers
         {
             return Ok(_postRepository.GetAllPublishedPosts());
         }
+        //ok takes the C# data into JSON data and send it to the client as a response.  
 
-        //[HttpGet("{id}")]
-        //public IActionResult Get(int id)
-        //{
-        //    var post = _postRepository.GetPostById(id);
-        //    if (post == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(post);
-        //}
+        //used for post detail
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var post = _postRepository.GetPublishedPostById(id);
 
+            if (post == null)
+            {
+                return NotFound();
+            }
+            return Ok(post);
+        }
+
+
+
+        [HttpGet("/GetPostIdWithComments/{id}")]
+        public IActionResult GetPostIdWithComments(int id)
+        {
+            var post = _postRepository.GetPostIdWithComments(id);
+            if (post == null)
+            {
+                return NotFound();
+            }
+            return Ok(post);
+        }
         //[HttpGet("GetWithComments")]
         //public IActionResult GetWithComments()
         //{

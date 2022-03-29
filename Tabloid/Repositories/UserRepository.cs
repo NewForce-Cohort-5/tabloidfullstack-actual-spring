@@ -116,7 +116,6 @@ namespace Tabloid.Repositories
                                         OUTPUT INSERTED.ID
                                         VALUES (@FirstName, @LastName, @DisplayName, 
                                                 @Email, @CreateDateTime, @ImageLocation, @UserTypeId)";
-                    //DbUtils.AddParameter(cmd, "@FirebaseUserId", userProfile.FirebaseUserId);
                     DbUtils.AddParameter(cmd, "@FirstName", userProfile.FirstName);
                     DbUtils.AddParameter(cmd, "@LastName", userProfile.LastName);
                     DbUtils.AddParameter(cmd, "@DisplayName", userProfile.DisplayName);
@@ -136,7 +135,6 @@ namespace Tabloid.Repositories
                 {
 
                     Id = DbUtils.GetInt(reader, "Id"),
-                    //FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
                     FirstName = DbUtils.GetString(reader, "FirstName"),
                     LastName = DbUtils.GetString(reader, "LastName"),
                     DisplayName = DbUtils.GetString(reader, "DisplayName"),
@@ -153,19 +151,5 @@ namespace Tabloid.Repositories
             }
         }
 
-        /*
-        public UserProfile GetByFirebaseUserId(string firebaseUserId)
-        {
-            return _context.UserProfile
-                       .Include(up => up.UserType) 
-                       .FirstOrDefault(up => up.FirebaseUserId == firebaseUserId);
-        }
-
-        public void Add(UserProfile userProfile)
-        {
-            _context.Add(userProfile);
-            _context.SaveChanges();
-        }
-        */
     }
 

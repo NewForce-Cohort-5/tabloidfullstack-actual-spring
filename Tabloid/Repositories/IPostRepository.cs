@@ -17,9 +17,9 @@ namespace TabloidFullStack.Repositories
         void Add(Post post);
         List<Post> GetAllPublishedPosts();
         Post GetPublishedPostById(int id);
-        Post GetUserPostById(int id, int userProfileId);
-        List<Post> GetUserPostById(int userProfileId);
+        
         void Delete(int postId);
         //void UpdatePost(Post post);
+        Post GetPostIdWithComments(int id);
     }
 }
