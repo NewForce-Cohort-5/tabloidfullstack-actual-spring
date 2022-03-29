@@ -49,6 +49,7 @@ namespace Tabloid.Controllers
         [HttpPost]
         public IActionResult Post(UserProfile userProfile)
         {
+                
             userProfile.CreateDateTime = DateTime.Now;
             userProfile.UserTypeId = UserType.AUTHOR_ID;
             _userRepository.Add(userProfile);
