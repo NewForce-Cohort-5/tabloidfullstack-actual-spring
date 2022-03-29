@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Post } from "./Post";
 
 export const PostDetail = () => {
-  const [post, setPost] = useState({});
+  const [singlePost, setPost] = useState({});
   const { GetPostsById } = useContext(PostContext);
   const { id } = useParams();
 
@@ -19,11 +19,15 @@ export const PostDetail = () => {
         <div className="col-sm-12 col-lg-6">
           {/* <Post post={post} />
           <ListGroup>
-            {post.comments.map((c) => (
+            {singlePost.comments.map((c) => (
               <ListGroupItem>{c.message}</ListGroupItem>
             ))}
           </ListGroup> */}
-          <strong>Post title: {post.title}</strong>
+          <strong>Post title: {singlePost.title}</strong>
+          <div><img src={singlePost.imageLocation} alt="post-image"></img></div>
+          <p>{singlePost.content}</p>
+          <strong> Published on: {singlePost.publishDateTime}</strong>
+          <strong> Author: {singlePost.userProfile?.displayName}</strong>
         </div>
       </div>
     </div>

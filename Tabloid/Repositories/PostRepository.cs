@@ -186,7 +186,7 @@ namespace TabloidFullStack.Repositories
             }
         }
 
-                    public Post GetPublishedPostById(int id)
+        public Post GetPublishedPostById(int id)
         {
             using (var conn = Connection)
             {
@@ -286,11 +286,12 @@ namespace TabloidFullStack.Repositories
                 ImageLocation = DbUtils.GetNullableString(reader, "HeaderImage"),
                 CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
                 PublishDateTime = DbUtils.GetNullableDateTime(reader, "PublishDateTime"),
-                //CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
-                //Category = new Category() {
-                //    Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
-                //    Name = reader.GetString(reader.GetOrdinal("CategoryName"))
-                //},
+                CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+                Category = new Category()
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+                    Name = reader.GetString(reader.GetOrdinal("CategoryName"))
+                },
                 UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
                 UserProfile = new UserProfile()
                 {

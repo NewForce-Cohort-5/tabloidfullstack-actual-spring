@@ -23,8 +23,9 @@ namespace Tabloid.Controllers
         {
             return Ok(_postRepository.GetAllPublishedPosts());
         }
-        //ok makes the C# data into JSON data and send it to the client as a response.  
+        //ok takes the C# data into JSON data and send it to the client as a response.  
 
+        //used for post detail
         [HttpGet("{id}")]
         public IActionResult Get(int id)
         {
@@ -36,19 +37,6 @@ namespace Tabloid.Controllers
             }
             return Ok(post);
         }
-
-
-        ////used for the post detail
-        //[HttpGet("{id}")]
-        //public IActionResult Get(int id)
-        //{
-        //    var post = _postRepository.GetPostById(id);
-        //    if (post == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return Ok(post);
-        //}
 
 
 
