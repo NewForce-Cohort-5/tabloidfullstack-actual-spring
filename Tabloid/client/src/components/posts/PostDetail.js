@@ -26,7 +26,7 @@ export const PostDetail = () => {
           <strong>Post title: {singlePost.title}</strong>
           <div><img src={singlePost.imageLocation} alt="post-image"></img></div>
           <p>{singlePost.content}</p>
-          <strong> Published on: {singlePost.publishDateTime}</strong>
+          <strong> Published on: {new Date(singlePost.publishDateTime).toLocaleDateString('en-us')}</strong>
           <strong> Author: {singlePost.userProfile?.displayName}</strong>
         </div>
       </div>
