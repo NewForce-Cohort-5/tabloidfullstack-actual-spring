@@ -16,14 +16,15 @@ export default function Register() {
   const [confirmPassword, setConfirmPassword] = useState();
 
   const registerClick = (e) => {
-    e.preventDefault();
-    if (password && password !== confirmPassword) {
-      alert("Passwords don't match. Do better.");
-    } else {
-      const userProfile = { firstName, lastName, displayName, imageLocation, email };
-      register(userProfile, password)
-        .then(() => navigate("/"));
-    }
+     e.preventDefault();
+      if (password && password !== confirmPassword) {
+        alert("Passwords don't match. Do better.");
+      } else {
+        const userProfile = { firstName, lastName, displayName, imageLocation, email };
+        register(userProfile, password)
+          .then(() => navigate("/"));
+      }
+   
  };
 
   return (
