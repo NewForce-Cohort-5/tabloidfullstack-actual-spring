@@ -6,6 +6,7 @@ import { Button, ListGroup, ListGroupItem } from "reactstrap";
 import { CommentContext } from "../../providers/CommentProvider";
 import { useNavigate } from "react-router";
 import { Modal } from "react-bootstrap";
+import Swal from "sweetalert2";
 
 
 const CommentList = () => {
@@ -49,7 +50,13 @@ const handleSaveComment = (event) => {
 
 
 const handleDelete = () => {
-deleteComment(post)         
+  Swal.fire({
+    title: 'Error!',
+    text: 'Do you want to continue',
+    icon: 'error',
+    confirmButtonText: 'Cool'
+  }).then(post.comments.find(c => deleteComment(c.id)))
+  document.location.reload()
 }
 
   if (!post) {
