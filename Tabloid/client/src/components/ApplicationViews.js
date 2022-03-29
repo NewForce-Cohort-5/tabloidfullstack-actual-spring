@@ -14,9 +14,11 @@ import {TagList} from "./tags/TagList";
 import { TagProvider } from "../providers/TagProvider";
 import { PostList } from "./posts/PostList";
 import { PostProvider } from "../providers/PostProvider";
+import { PostDetail } from "./posts/PostDetail";
 import UserList from "./users/UserList";
 import { UserDetails } from "./users/UserDetail";
 import TagForm from "./tags/TagForm";
+// import UserPosts from "./posts/UserPosts";
 import CommentList from "./posts/PostCommentList";
 
 export default function ApplicationViews() {
@@ -33,6 +35,7 @@ export default function ApplicationViews() {
   }
   else{
    return(
+     <UserProfileProvider>
      <PostProvider>
     <TagProvider>  
       <CategoryProvider>
@@ -41,22 +44,26 @@ export default function ApplicationViews() {
           <Route path="/category" element={ <CategoryList />} />
           <Route path="/category/add" element={ <CategoryForm />} />
           <Route path="/category/delete/:id" element={<CategoryForm />} />
-          <Route path="category/edit/:categoryId/*" element={<CategoryForm />} />        
+          <Route path="category/edit/:categoryId/*" element={<CategoryForm />} />      
+
           <Route path="/users" element={<UserList />} />
-          <Route path="/add/tags" element={<TagForm />} />
           <Route path="/users/:id" element={<UserDetails />} />
+
           <Route path="/tags" element={<TagList />} />
-          <Route path="/posts" element={<PostList />} />
-          <Route path="/post/comments/:id" element={<CommentList />} />
-          <Route path="/users/:id" element={<UserDetails />} />
-          <Route path="/tags" element={<TagList/>} />
-          <Route path="/add/tags/" element={<TagForm />} />
+          <Route path="/add/tags" element={<TagForm />} />
           <Route path="/delete/tags/:TagId" element={<TagForm />} />
           <Route path="tags/edit/:tagId/*" element={<TagForm />} />
+
+          <Route path="/posts" element={<PostList />} />
+          <Route path="/posts/:id" element={<PostDetail />} />
+          {/* <Route path="/myposts" element={<UserPosts />} /> */}
+          <Route path="/post/comments/:id" element={<CommentList />} />
+          
         </Routes>
       </CategoryProvider>
     </TagProvider>
-    </PostProvider>  
+    </PostProvider>
+    </UserProfileProvider>
 
 
    );

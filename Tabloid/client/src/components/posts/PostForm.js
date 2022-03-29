@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import Post from "./Post";
 
 
-const PostForm = () => {
+export const PostForm = () => {
     const {GetAllPublishedPosts} = useContext(PostContext)
 
     const [post, setPost] = useState({
@@ -50,20 +50,7 @@ const PostForm = () => {
                 <input type="text" id="title" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="post title" value={Post.title}/>
                 </div>
            </fieldset>
-           <fieldset>
-                <div className="formGroup">
-                <label htmlFor="title">Gif Url:</label>
-                <input type="text" id="imageUrl" onChange={handleControlledInputChange} required className="form-control" placeholder="post imageUrl" value={Post.imageUrl}/>
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="formGroup">
-                <label htmlFor="title">Caption:</label>
-                <input type="text" id="caption" onChange={handleControlledInputChange} required  className="form-control" placeholder="post caption" value={Post.caption}/>
-                </div>
-            </fieldset>
-            
-               
+                        
             <div className="form-group row col-sm-12 mx-auto mb-3">
                     <div className="col-sm-12">
                         <button type="submit" className="btn btn-primary" onClick={handleSavePost}>
@@ -74,4 +61,3 @@ const PostForm = () => {
         </form>
     )
 }
-export default PostForm;
