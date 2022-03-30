@@ -21,6 +21,7 @@ import TagForm from "./tags/TagForm";
 // import UserPosts from "./posts/UserPosts";
 import CommentList from "./posts/PostCommentList";
 import { CommentProvider } from "../providers/CommentProvider";
+import { Comment } from "./posts/Comment";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
