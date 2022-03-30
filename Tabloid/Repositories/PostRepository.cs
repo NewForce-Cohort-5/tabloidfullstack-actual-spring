@@ -354,7 +354,8 @@ namespace TabloidFullStack.Repositories
 
         }
 
-        public List<Post> GetUserTagByPostId(int id)
+
+        public void AddTagToPost(PostTag postTag)
         {
             using (var conn = Connection)
             {
@@ -362,29 +363,21 @@ namespace TabloidFullStack.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                       SSELECT pt.tagId as 'TagID', pt.postId as 'PostId', t.name as 'Tag Name'
-                         FROM PostTag pt
-                              LEFT JOIN tag t ON pt.tagId = t.id
-                              LEFT JOIN Post p ON pt.postId = p.id
-                             where pt.postId = @id";
+                       INSERT INTO PostTag (tagId , postId)
+                              OUTPUT INSERTED.Id
+                    VALUES (@tagId, @postId)";
+                        
 
-                    cmd.Parameters.AddWithValue("@userProfileId", id);
-                    var reader = cmd.ExecuteReader();
 
-                    var posts = new List<Post>();
+                    cmd.Parameters.AddWithValue("@tagId",  postTag.TagId);
+                    cmd.Parameters.AddWithValue("@postId", postTag.PostId);
+                   
 
-                    while (reader.Read())
-                    {
-                        posts.Add(NewPostFromReader(reader));
-                    }
-
-                    reader.Close();
-
-                    return posts;
+                    int id = (int)cmd.ExecuteScalar();
+                postTag.Id = id;
                 }
             }
         }
-
         private Post NewPostFromReader(SqlDataReader reader)
         {
             return new Post()

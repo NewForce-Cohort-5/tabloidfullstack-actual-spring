@@ -34,6 +34,9 @@ export const PostDetail = () => {
           <strong> Author: {singlePost.userProfile?.displayName}</strong>
           <div>  <button className="btn btn-primary" outline onClick={() => navigate(`/post/comments/${singlePost.id}`)}>
     View Comments
+  </button>
+  <button className="btn btn-primary" outline onClick={() => navigate(`/posts/ManageTag/${singlePost.id}`)}>
+    ManageTag
   </button></div>
         
         </div>

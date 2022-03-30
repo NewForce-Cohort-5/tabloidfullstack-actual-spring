@@ -21,6 +21,7 @@ import TagForm from "./tags/TagForm";
 // import UserPosts from "./posts/UserPosts";
 import CommentList from "./posts/PostCommentList";
 import { CommentProvider } from "../providers/CommentProvider";
+import { ManageTagForm } from "./posts/ManageTagForm";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -58,6 +59,7 @@ export default function ApplicationViews() {
 
           <Route path="/posts" element={<PostList />} />
           <Route path="/posts/:id" element={<PostDetail />} />
+          <Route path="/posts/ManageTag/:id" element={<ManageTagForm />} />
           {/* <Route path="/myposts" element={<UserPosts />} /> */}
           <Route path="/post/comments/:id/*" element={<CommentList />} />
           

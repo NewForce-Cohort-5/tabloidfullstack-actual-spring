@@ -28,18 +28,8 @@ export const PostForm = () => {
         setPost(newPost)
     }
 
-    const handleSavePost = (event) => {
-        event.preventDefault()
+  
 
-        if(post.title === "" || post.imageUrl ==="" )
-        {
-            alert("Please fill out the title and/or image url fields.")
-        } else {
-            addPost(post)
-            .then(navigate("/"));
-     }
-      
-    }
     
     return(
         <form className="postForm">

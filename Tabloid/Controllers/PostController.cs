@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using TabloidFullStack.Repositories;
 using System.Collections.Generic;
 using Tabloid.Repositories;
+using Tabloid.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -50,37 +51,18 @@ namespace Tabloid.Controllers
             }
             return Ok(post);
         }
-        [HttpGet("GetWithComments")]
-        public IActionResult GetWithComments()
+
+
+
+        [HttpPost("AddTagToPost")]
+        public void Post(PostTag postTag)
         {
-            var posts = _postRepository.GetAllWithComments();
-            return Ok(posts);
+            _postRepository.AddTagToPost(postTag);
         }
 
-        //[HttpPost]
-        //public IActionResult Post(Post post)
-        //{
-        //    _postRepository.Add(post);
-        //    return CreatedAtAction("Get", new { id = post.Id }, post);
-        //}
 
-        //[HttpPut("{id}")]
-        //public IActionResult Put(int id, Post post)
-        //{
-        //    if (id != post.Id)
-        //    {
-        //        return BadRequest();
-        //    }
 
-        //    _postRepository.Update(post);
-        //    return NoContent();
-        //}
 
-        //[HttpDelete("{id}")]
-        //public IActionResult Delete(int id)
-        //{
-        //    _postRepository.Delete(id);
-        //    return NoContent();
-        //}
+
     }
 }

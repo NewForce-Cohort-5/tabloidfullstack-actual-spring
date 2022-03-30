@@ -6,7 +6,7 @@ using TabloidFullStack.Models;
 //using TabloidFullStack.Utils;
 using System.Collections.Generic;
 using System.Linq;
-
+using Tabloid.Models;
 
 namespace TabloidFullStack.Repositories
 {
@@ -21,5 +21,8 @@ namespace TabloidFullStack.Repositories
         void Delete(int postId);
         //void UpdatePost(Post post);
         Post GetPostIdWithComments(int id);
+
+       
+        public void AddTagToPost(PostTag postTag);
     }
 }

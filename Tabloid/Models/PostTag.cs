@@ -3,7 +3,7 @@
     public class PostTag
     {
         public int Id { get; set; }
-        public string TagId { get; set; }
-        public string PostId { get; set; }
+        public int TagId { get; set; }
+        public int PostId { get; set; }
     }
 }
