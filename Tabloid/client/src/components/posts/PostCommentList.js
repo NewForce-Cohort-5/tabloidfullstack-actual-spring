@@ -11,9 +11,10 @@ import Swal from "sweetalert2";
 
 
 const CommentList = () => {
+  const [idToEdit, setIdToEdit] = useState(0)
   const [post, setPost] = useState();
   const { getPostWithComments } = useContext(PostContext);
-  const { addComment, deleteComment } = useContext(CommentContext);
+  const { addComment } = useContext(CommentContext);
   const currentUser = JSON.parse(sessionStorage.getItem("userProfile"));
   const currentUserId = currentUser.id
   const { id } = useParams();
@@ -36,7 +37,6 @@ const CommentList = () => {
   });
 
   
-const navigate = useNavigate();
   
   const handleControlledInputChange = (event) => {
     const newComment = {...comment}
@@ -73,10 +73,15 @@ const handleSaveComment = (event) => {
     onClick={handleShow}
   >
     Add Comment
-  </Button>     
-      <ListGroup>
-      {post.comments.map(pc => <Comment key={pc.id} commentProp={pc} setPost={setPost} />)}
-      </ListGroup>        
+  </Button> 
+  {
+        post.comments.map(pc => {
+
+           
+               return (<Comment key={pc.id} commentProp={pc} setPost={setPost} stateChangingFunction={setIdToEdit} addCommentToState={setComment} />)
+       }
+      )  
+    }     
       </div>
     </div>
   </div>

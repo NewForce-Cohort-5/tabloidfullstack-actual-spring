@@ -24,8 +24,18 @@ export const CommentProvider = (props) => {
     })
 };
 
+const updateComment = comment => {
+  return fetch(`https://localhost:44360/api/Comment/${comment.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(comment)
+  })
+}
+
   return (
-    <CommentContext.Provider value={{ comments, addComment, deleteComment }}>
+    <CommentContext.Provider value={{ comments, addComment, deleteComment, updateComment }}>
       {props.children}
     </CommentContext.Provider>
   );
