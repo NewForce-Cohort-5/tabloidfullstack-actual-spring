@@ -8,19 +8,17 @@ import Post from "./Post";
 export const ManageTagForm = () => {
 
     const {tags ,getAllTags, getTagById } = useContext(TagContext)
-    const { GetPostsById, addTagToPost } = useContext(PostContext)
+    const {GetAllPublishedPosts, GetPostsById, addTagToPost } = useContext(PostContext)
     const {postId} = useParams();
 
-    const [postTag, setPostTag] = useState({
-        postId: 0,
-        tagId: 0,
-        });
+    const [postTag, setPostTag] = useState({});
     
     const navigate = useNavigate();
 
     useEffect(()=> {
-        getAllTags().then(()=> GetPostsById(postId))
-        //need to get post by id and tagbyid?
+        getAllTags()
+     
+        
     }, []);
 
 
@@ -32,17 +30,19 @@ export const ManageTagForm = () => {
     }
 
     const handleSavePostTag = (event) => {
+        
         event.preventDefault()
-
+        postTag.postId = postId
         addTagToPost(postTag)
-            .then(navigate("/"));
+            .then(navigate(`/posts/${postId}`));
      }
       
     
     
     return(
         <form className="postForm">
-            <h2>New Post</h2>
+            <h2>Manage Tag</h2>
+        
             <fieldset>
                 <label for="cars">Choose a Tag:</label>
         <select value={tags.Id} name="tagId" id="tagId" className="form-control" onChange={handleControlledInputChange}>
@@ -58,7 +58,7 @@ export const ManageTagForm = () => {
             <div className="form-group row col-sm-12 mx-auto mb-3">
                     <div className="col-sm-12">
                         <button type="submit" className="btn btn-primary" onClick={handleSavePostTag}>
-                            Save Post
+                            Save Tag
                         </button>
                     </div>
                     </div>

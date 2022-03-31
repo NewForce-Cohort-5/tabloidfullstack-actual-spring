@@ -36,7 +36,9 @@ namespace TabloidFullStack.Models
         [DisplayName("Author")]
         public int UserProfileId { get; set; }
         public UserProfile UserProfile { get; set; }
+
         public PostTag PostTag { get; set; }
+        public Tag Tag { get; set; }
 
         public List <Comment> Comments { get; set; }
         public List <Tag> tags { get; set; }

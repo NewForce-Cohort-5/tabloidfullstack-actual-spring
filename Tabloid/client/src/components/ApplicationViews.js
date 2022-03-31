@@ -59,7 +59,7 @@ export default function ApplicationViews() {
 
           <Route path="/posts" element={<PostList />} />
           <Route path="/posts/:id" element={<PostDetail />} />
-          <Route path="/posts/ManageTag/:id" element={<ManageTagForm />} />
+          <Route path="/posts/ManageTag/:postId" element={<ManageTagForm />} />
           {/* <Route path="/myposts" element={<UserPosts />} /> */}
           <Route path="/post/comments/:id/*" element={<CommentList />} />
           

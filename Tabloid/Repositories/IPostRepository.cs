@@ -22,7 +22,8 @@ namespace TabloidFullStack.Repositories
         //void UpdatePost(Post post);
         Post GetPostIdWithComments(int id);
 
-       
         public void AddTagToPost(PostTag postTag);
+
+
     }
 }
