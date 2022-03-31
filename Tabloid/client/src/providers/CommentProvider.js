@@ -18,8 +18,14 @@ export const CommentProvider = (props) => {
     })
   };
 
+  const deleteComment = (commentId) => {
+    return fetch(`https://localhost:44360/api/Comment/${commentId}`, {
+        method: "DELETE"
+    })
+};
+
   return (
-    <CommentContext.Provider value={{ comments, addComment }}>
+    <CommentContext.Provider value={{ comments, addComment, deleteComment }}>
       {props.children}
     </CommentContext.Provider>
   );

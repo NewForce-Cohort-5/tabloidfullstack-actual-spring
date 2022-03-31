@@ -5,13 +5,15 @@ import { PostContext } from "../../providers/PostProvider";
 import { Button, ListGroup, ListGroupItem } from "reactstrap";
 import { CommentContext } from "../../providers/CommentProvider";
 import { useNavigate } from "react-router";
+import { Comment } from "./Comment";
 import { Modal } from "react-bootstrap";
+import Swal from "sweetalert2";
 
 
 const CommentList = () => {
   const [post, setPost] = useState();
   const { getPostWithComments } = useContext(PostContext);
-  const { addComment } = useContext(CommentContext);
+  const { addComment, deleteComment } = useContext(CommentContext);
   const currentUser = JSON.parse(sessionStorage.getItem("userProfile"));
   const currentUserId = currentUser.id
   const { id } = useParams();
@@ -32,6 +34,7 @@ const CommentList = () => {
     userProfileId: currentUserId,
     postId: parseInt(id)
   });
+
   
 const navigate = useNavigate();
   
@@ -44,9 +47,16 @@ const navigate = useNavigate();
 const handleSaveComment = (event) => {
   event.preventDefault()
   addComment(comment)
+  .then(() => getPostWithComments(id))
+  .then(changedpost =>{ 
+     setPost(changedpost)
+     handleClose()
+  })
+  comment.subject = ""
+  comment.content = ""
   
-  document.location.reload()
 }
+
 
   if (!post) {
     return null;
@@ -65,8 +75,7 @@ const handleSaveComment = (event) => {
     Add Comment
   </Button>     
       <ListGroup>
-      {post.comments.map(pc => <ListGroupItem className="mt-3 m-1" key={pc.id}><b>Comment by:</b> {pc.userProfile.displayName} <div><b>Subject:</b> {pc.subject}</div> <b>Content:</b> {pc.content} <div><b>Created:</b> {new Date(pc.createDateTime).toLocaleDateString(
-'en-US')}</div>  </ListGroupItem>)}
+      {post.comments.map(pc => <Comment key={pc.id} commentProp={pc} setPost={setPost} />)}
       </ListGroup>        
       </div>
     </div>
