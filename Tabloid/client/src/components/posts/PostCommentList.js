@@ -2,12 +2,10 @@ import React, { useEffect, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import Post from "./Post";
 import { PostContext } from "../../providers/PostProvider";
-import { Button, ListGroup, ListGroupItem } from "reactstrap";
+import { Button } from "reactstrap";
 import { CommentContext } from "../../providers/CommentProvider";
-import { useNavigate } from "react-router";
-import { Comment } from "./Comment";
+import { Comment } from "./PostComment";
 import { Modal } from "react-bootstrap";
-import Swal from "sweetalert2";
 
 
 const CommentList = () => {

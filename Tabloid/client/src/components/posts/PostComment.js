@@ -2,20 +2,20 @@ import React, { useEffect, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import Post from "./Post";
 import { PostContext } from "../../providers/PostProvider";
-import { Button, ListGroup, ListGroupItem } from "reactstrap";
+import { ListGroupItem } from "reactstrap";
 import { CommentContext } from "../../providers/CommentProvider";
-import { useNavigate } from "react-router";
-import { Modal } from "react-bootstrap";
 import Swal from "sweetalert2";
-
+import { useNavigate } from "react-router-dom";
 
 export const Comment = ({ commentProp, setPost }) => {
     const currentUser = JSON.parse(sessionStorage.getItem("userProfile"));
     const currentUserId = currentUser.id
-    const {deleteComment, updateComment, addComment} = useContext(CommentContext)
+    const {deleteComment, updateComment} = useContext(CommentContext)
     const {getPostWithComments} = useContext(PostContext)
     const { id } = useParams();
     const [idToEdit, setIdToEdit] = useState(0)
+    const navigate = useNavigate();
+
    
 
    
@@ -29,7 +29,6 @@ export const Comment = ({ commentProp, setPost }) => {
 
       const onClickHandler = () => {
         setIdToEdit(commentProp.id)
-        debugger
         setComment(commentProp)
       }
 
@@ -48,14 +47,9 @@ export const Comment = ({ commentProp, setPost }) => {
         })
             setIdToEdit(0)
             setComment({})
-            getPostWithComments(id)
-            .then(changedpost =>{ 
-               setPost(changedpost)
-            })
-     debugger
-  
-            comment.subject = ""
-            comment.content = ""  
+            getPostWithComments(id).then(() => { getPostWithComments(id).then(setPost)
+            }) 
+        
       }
      
       
@@ -94,9 +88,9 @@ export const Comment = ({ commentProp, setPost }) => {
               <input type="text" id="content"  required className="form-control" 
             placeholder="Edit message" onChange={handleControlledInputChange} defaultValue={comment.content}/>
            
-           <button className="btn btn-primary btn-dark"
-onClick={handleSaveComment}> {<>Save edited comment</>}
-</button>
+           <button className="btn btn-primary btn-secondary"
+onClick={handleSaveComment}> {<>Save comment</>}
+</button> <button className="btn btn-danger" onClick={(() => (setIdToEdit(0)))}>Cancel</button>
            
             </fieldset>  )
         
