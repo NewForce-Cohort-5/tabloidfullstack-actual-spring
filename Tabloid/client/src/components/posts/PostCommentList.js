@@ -2,13 +2,14 @@ import React, { useEffect, useContext, useState } from "react";
 import { useParams } from "react-router-dom";
 import Post from "./Post";
 import { PostContext } from "../../providers/PostProvider";
-import { Button, ListGroup, ListGroupItem } from "reactstrap";
+import { Button } from "reactstrap";
 import { CommentContext } from "../../providers/CommentProvider";
-import { useNavigate } from "react-router";
+import { Comment } from "./PostComment";
 import { Modal } from "react-bootstrap";
 
 
 const CommentList = () => {
+  const [idToEdit, setIdToEdit] = useState(0)
   const [post, setPost] = useState();
   const { getPostWithComments } = useContext(PostContext);
   const { addComment } = useContext(CommentContext);
@@ -32,8 +33,8 @@ const CommentList = () => {
     userProfileId: currentUserId,
     postId: parseInt(id)
   });
+
   
-const navigate = useNavigate();
   
   const handleControlledInputChange = (event) => {
     const newComment = {...comment}
@@ -44,9 +45,16 @@ const navigate = useNavigate();
 const handleSaveComment = (event) => {
   event.preventDefault()
   addComment(comment)
+  .then(() => getPostWithComments(id))
+  .then(changedpost =>{ 
+     setPost(changedpost)
+     handleClose()
+  })
+  comment.subject = ""
+  comment.content = ""
   
-  document.location.reload()
 }
+
 
   if (!post) {
     return null;
@@ -63,11 +71,15 @@ const handleSaveComment = (event) => {
     onClick={handleShow}
   >
     Add Comment
-  </Button>     
-      <ListGroup>
-      {post.comments.map(pc => <ListGroupItem className="mt-3 m-1" key={pc.id}><b>Comment by:</b> {pc.userProfile.displayName} <div><b>Subject:</b> {pc.subject}</div> <b>Content:</b> {pc.content} <div><b>Created:</b> {new Date(pc.createDateTime).toLocaleDateString(
-'en-US')}</div>  </ListGroupItem>)}
-      </ListGroup>        
+  </Button> 
+  {
+        post.comments.map(pc => {
+
+           
+               return (<Comment key={pc.id} commentProp={pc} setPost={setPost} stateChangingFunction={setIdToEdit} addCommentToState={setComment} />)
+       }
+      )  
+    }     
       </div>
     </div>
   </div>
