@@ -19,23 +19,19 @@ export const PostDetail = () => {
   useEffect(() => {
      GetPostsById(id).then(setPost);
   }, []);
-
+ 
   return (
+    
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-sm-12 col-lg-6">
-          {/* <Post post={post} />
-          <ListGroup>
-            {singlePost.comments.map((c) => (
-              <ListGroupItem>{c.message}</ListGroupItem>
-            ))}
-          </ListGroup> */}
-          <strong>{singlePost.title}</strong>
+                    <strong>{singlePost.title}</strong>
           <div><img src={singlePost.imageLocation} alt="post-image"></img></div>
           <p>{singlePost.content}</p>
+          
           <ListGroup>
-      {singlePost.tag.map(pt => <ListGroupItem className="mt-3 m-1" key={pt.tag?.id}><b>Tag Name: </b> {pt.tag?.name}  </ListGroupItem>)}
-      </ListGroup>  
+      {singlePost.tags?.map(pt => <ListGroupItem className="mt-3 m-1" key={pt.id}><b>Tag Name: </b> {pt.name}  </ListGroupItem>)}
+      </ListGroup>   
           <strong> Published on: {new Date(singlePost.publishDateTime).toLocaleDateString('en-us')}</strong>
           <strong> Author: {singlePost.userProfile?.displayName}</strong>
           <div>  <button className="btn btn-primary" outline onClick={() => navigate(`/post/comments/${singlePost.id}`)}>
