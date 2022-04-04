@@ -19,9 +19,22 @@ export const PostProvider = (props) => {
     return fetch(`https://localhost:44360/GetPostIdWithComments/${id}`).then((res) => res.json());
 };
 
+const addTagToPost = (tag) => {
+  debugger
+  return fetch("https://localhost:44360/api/Post/AddTagToPost", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(tag)
+ 
+  }).then(GetAllPublishedPosts);
+
+};  
+
  
   return (
-    <PostContext.Provider value={{ posts, GetAllPublishedPosts, getPostWithComments, GetPostsById}}>
+    <PostContext.Provider value={{ posts, GetAllPublishedPosts, getPostWithComments, GetPostsById, addTagToPost}}>
       {props.children}
     </PostContext.Provider>
   );
